@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
+
+SyntaxHighlighter.registerLanguage('python', python);
 
 export default function BigramModel() {
   const [selectedFile, setSelectedFile] = useState('README.md');

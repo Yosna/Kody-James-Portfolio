@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
+
+SyntaxHighlighter.registerLanguage('javascript', javascript);
 
 export default function AntSwarm() {
   const [selectedFile, setSelectedFile] = useState('README.md');

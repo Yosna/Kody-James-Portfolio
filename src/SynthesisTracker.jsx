@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import lua from 'react-syntax-highlighter/dist/esm/languages/prism/lua';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
+
+SyntaxHighlighter.registerLanguage('lua', lua);
 
 export default function SynthesisTracker() {
   const [selectedFile, setSelectedFile] = useState('README.md');

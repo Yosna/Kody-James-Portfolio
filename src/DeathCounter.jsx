@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import autohotkey from 'react-syntax-highlighter/dist/esm/languages/prism/autohotkey';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
+
+SyntaxHighlighter.registerLanguage('autohotkey', autohotkey);
 
 export default function DeathCounter() {
   const [selectedFile, setSelectedFile] = useState('README.md');
