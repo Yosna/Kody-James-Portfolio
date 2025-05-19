@@ -9,7 +9,7 @@ export default function SynthesisTracker() {
   const [fileContent, setFileContent] = useState('');
 
   useEffect(() => {
-    fetch(`/code/SynthesisTracker/${selectedFile}`)
+    fetch(`/Kody-James-Portfolio/code/SynthesisTracker/${selectedFile}`)
       .then((res) => res.text())
       .then(setFileContent)
       .catch((err) => setFileContent(`Error loading file: ${err.message}`));

@@ -9,7 +9,7 @@ export default function AntSwarm() {
   const [fileContent, setFileContent] = useState('');
 
   useEffect(() => {
-    fetch(`/code/AntSwarm/${selectedFile}`)
+    fetch(`/Kody-James-Portfolio/code/AntSwarm/${selectedFile}`)
       .then((res) => res.text())
       .then(setFileContent)
       .catch((err) => setFileContent(`Error loading file: ${err.message}`));

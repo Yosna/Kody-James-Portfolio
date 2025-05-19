@@ -9,7 +9,7 @@ export default function DeathCounter() {
   const [fileContent, setFileContent] = useState('');
 
   useEffect(() => {
-    fetch(`/code/DeathCounter/${selectedFile}`)
+    fetch(`/Kody-James-Portfolio/code/DeathCounter/${selectedFile}`)
       .then((res) => res.text())
       .then(setFileContent)
       .catch((err) => setFileContent(`Error loading file: ${err.message}`));

@@ -9,7 +9,7 @@ export default function BigramModel() {
   const [fileContent, setFileContent] = useState('');
 
   useEffect(() => {
-    fetch(`/code/BigramModel/${selectedFile}`)
+    fetch(`/Kody-James-Portfolio/code/BigramModel/${selectedFile}`)
       .then((res) => res.text())
       .then(setFileContent)
       .catch((err) => setFileContent(`Error loading file: ${err.message}`));
