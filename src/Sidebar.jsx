@@ -10,7 +10,7 @@ export default function Sidebar() {
         <h2 className="text-2xl font-bold mb-6">Kody's Portfolio</h2>
         <ul className="space-y-2">
           <li>
-            <Link to="/">
+            <Link to="/Kody-James-Portfolio">
               <button className="w-full text-left hover:bg-gray-800 p-2 rounded">Home</button>
             </Link>
           </li>

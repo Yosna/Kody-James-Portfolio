@@ -15,7 +15,7 @@ function App() {
       </div>
       <div className="flex-1 h-full">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/Kody-James-Portfolio" element={<Home />} />
           <Route path="/death-counter" element={<DeathCounter />} />
           <Route path="/text-generator" element={<TextGenerator />} />
           <Route path="/bigram-model" element={<BigramModel />} />
