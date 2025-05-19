@@ -9,7 +9,8 @@ export default function TextGenerator() {
   const [fileContent, setFileContent] = useState('');
 
   useEffect(() => {
-    fetch(`/Kody-James-Portfolio/code/TextGenerator/${selectedFile}`)
+    const base = import.meta.env.BASE_URL;
+    fetch(`${base}code/TextGenerator/${selectedFile}`)
       .then((res) => res.text())
       .then(setFileContent)
       .catch((err) => setFileContent(`Error loading file: ${err.message}`));
