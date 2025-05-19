@@ -10,13 +10,19 @@ export default function Home() {
         ideas into working code.
       </p>
       <div className="flex flex-wrap gap-4 mb-8">
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">Python</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">JavaScript</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">React</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">AI/ML</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">Lua</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">AutoHotkey v2</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm">Web Dev</span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">Python</span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+          JavaScript
+        </span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">React</span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">AI/ML</span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">Lua</span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+          AutoHotkey v2
+        </span>
+        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+          Web Dev
+        </span>
       </div>
       <div className="text-md text-gray-400 mb-8 max-w-2xl text-center">
         <div>My recent projects include:</div>
@@ -44,8 +50,8 @@ export default function Home() {
       </div>
       <div className="flex gap-4">
         <a
-          href="/resume.pdf"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          href={`${import.meta.env.BASE_URL}Resume.pdf`}
+          className="bg-stone-600 hover:bg-stone-700 text-white px-4 py-2 rounded border border-stone-500 shadow-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -53,7 +59,7 @@ export default function Home() {
         </a>
         <a
           href="https://github.com/Yosna"
-          className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded"
+          className="bg-zinc-800 hover:bg-zinc-900 text-white px-4 py-2 rounded border border-zinc-500 shadow-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -61,7 +67,7 @@ export default function Home() {
         </a>
         <a
           href="https://www.linkedin.com/in/kody-james-75b976362/"
-          className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded"
+          className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded border border-blue-300 shadow-lg"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -69,7 +75,7 @@ export default function Home() {
         </a>
         <a
           href="mailto:kodyjames.yosna@gmail.com"
-          className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded"
+          className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded border border-rose-500 shadow-lg"
         >
           Email
         </a>
