@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+.syntax-highlighter pre,
+.syntax-highlighter code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.prose pre {
+  background-color: #23272e !important;
+}
+
+.prose code {
+  background-color: #23272e !important;
+  color: #e5e7eb !important;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none !important;
+}
+
+.prose h1 {
+  font-size: 2em;
+  display: flex;
+  gap: 0.5em;
+}
+
+.prose h1 img {
+  margin-bottom: -1.67em;
+  position: relative;
+  top: -1.67em;
+}
+
+.prose a {
+  color: #3b82f6 !important;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.prose a:visited {
+  color: #8b5cf6 !important;
+}
