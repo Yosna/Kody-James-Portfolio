@@ -64,10 +64,11 @@ config = { # Starts at line 45
 - PyTorch
 
 **Install dependencies with**:
+
 ```bash
 pip install torch
 ```
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](https://github.com/Yosna/Bigram-Character-Predictor/blob/main/LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](https://github.com/Yosna/Bigram-Language-Model/blob/main/LICENSE) for details.
