@@ -83,7 +83,7 @@ export default function TextGenerator() {
         <div className="w-full h-full flex flex-col">
           <div className="flex items-center justify-between mb-2 ml-8 mr-8">
             <label htmlFor="fileSelect" className="font-medium text-xl text-blue-200">
-              Select file:
+              Select a file to view:
             </label>
             <select
               id="fileSelect"
