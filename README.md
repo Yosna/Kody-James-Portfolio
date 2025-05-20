@@ -17,7 +17,7 @@ You can view the portfolio [here](https://yosna.github.io/Kody-James-Portfolio/)
 ## Languages and Tools Demonstrated
 
 - [AutoHotkey v2](https://www.autohotkey.com) (system-level programming, memory reading, process manipulation, GUI)
-- [Python](https://www.python.org) (machine learning, data processing, unit testing, file I/O)
+- [Python](https://www.python.org) (machine learning, data processing, CLI, unit testing, file I/O)
 - [PyTorch](https://pytorch.org) (neural networks, embedding layers, tensor operations, training loops)
 - [Lua](https://www.lua.org) (game addon development, event-driven programming, real-time data processing)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) (vanilla DOM manipulation, local storage, event handling)
