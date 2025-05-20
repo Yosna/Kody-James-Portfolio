@@ -43,4 +43,4 @@ Tracks synthesis information for items crafted, materials used, material loss ra
 
   ## License
 
-  This project is licensed under the MIT License. See [LICENSE](https://github.com/Yosna/FFXI-Synthesis-Tracker/blob/main/README.md) for details.
+  This project is licensed under the MIT License. See [LICENSE](https://github.com/Yosna/FFXI-Synthesis-Tracker/blob/main/LICENSE) for details.
