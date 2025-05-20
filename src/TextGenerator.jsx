@@ -68,7 +68,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~4 days (May 12<sup>th</sup> - May 16<sup>th</sup>, 2025)
+          Project duration: ~4 days (May 12<sup>th</sup> - May 19<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -97,6 +97,7 @@ export default function TextGenerator() {
               <option value="config.json">&#x2514;&#x2500; config.json</option>
               <optgroup label="&#x2514;&#x2500; /models">
                 <option value="models/registry.py">&#x251C;&#x2500; registry.py</option>
+                <option value="models/base_model.py">&#x251C;&#x2500; base_model.py</option>
                 <option value="models/bigram_model.py">&#x251C;&#x2500; bigram_model.py</option>
                 <option value="models/lstm_model.py">&#x2514;&#x2500; lstm_model.py</option>
               </optgroup>

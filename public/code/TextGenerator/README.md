@@ -2,22 +2,22 @@
 
 This project implements two text generation language models using PyTorch:
 
-- **Bigram model** — a simple neural network that learns character-to-character transition probabilities
-- **LSTM model** — a recurrent neural network capable of learning longer-range character sequences using memory and context
+* **Bigram model** — a simple neural network that learns character-to-character transition probabilities
+* **LSTM model** — a recurrent neural network capable of learning longer-range character sequences using memory and context
 
 The codebase is modular, config-driven, and supports training, checkpointing, early stopping, and generation from either model via CLI. A full suite of unit tests is included for all `utils.py` functions.
 
 ## Features
 
-- Character-level tokenization across multiple input files
-- Dynamic vocabulary and index mapping
-- Modular model registry for Bigram and LSTM
-- Configurable training via `config.json`
-- Adam optimizer with early stopping
-- Automatic checkpoint rotation and resumption
-- Multinomial sampling for randomized generation
-- CLI interface to toggle models and behavior
-- Full unit test coverage for utility functions
+* Character-level tokenization across multiple input files
+* Dynamic vocabulary and index mapping
+* Modular model registry for Bigram and LSTM
+* Configurable training via `config.json`
+* Adam optimizer with early stopping
+* Automatic checkpoint rotation and resumption
+* Multinomial sampling for randomized generation
+* CLI interface to toggle models and behavior
+* Full unit test coverage for utility functions
 
 ## Model Architectures
 
@@ -124,8 +124,8 @@ While not yet semantically accurate, the model shows proper word shapes, spacing
 
 ## Dependencies
 
-- Python 3.10+
-- PyTorch
+* Python 3.10+
+* PyTorch
 
 Install dependencies with:
 
@@ -135,10 +135,10 @@ pip install torch
 
 ## Future Improvements
 
-- Unit tests for model behavior and CLI
-- Add temperature scaling for more controllable sampling
-- Optionally add Transformer-based model for comparison
-- Loss visualization with matplotlib or TensorBoard
+* Unit tests for model behavior and CLI
+* Add temperature scaling for more controllable sampling
+* Optionally add Transformer-based model for comparison
+* Loss visualization with matplotlib or TensorBoard
 
 ## License
 
