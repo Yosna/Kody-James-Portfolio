@@ -39,6 +39,13 @@ export default function AntSwarm() {
           an incremental game would be a simpler project to start with and a fun way to learn more
           about web development.
         </p>
+        <p className="mb-4 leading-relaxed text-gray-200">
+          The decision to make it text-based was intentional, as I’ve always felt those types of
+          incrementals stand out the most with the focus being centered on the progression systems.
+          Mine Defense was the incremental that inspired me, with some other notable ones being
+          Candy Box, Kittens Game, A Dark Room, Swarm Simulator (original), Crank, and Antimatter
+          Dimensions. I wanted to follow what felt like tradition.
+        </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">How It Works</h2>
         <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
           <li>Uses modular JavaScript to manage game logic, upgrades, and UI.</li>
