@@ -30,10 +30,10 @@ export default function TextGenerator() {
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Overview:</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
           Multi-Model AI Text Generator is a modular, extensible text generation project built with
-          PyTorch. It supports a simple bigram model and both LSTM and transformer models, allowing
-          for experimentation with different neural network architectures. The project features a
-          fully modular codebase, configuration-driven training, and a command-line interface for
-          switching between models and behaviors.
+          PyTorch. It supports a simple bigram model, plus both LSTM and transformer models,
+          allowing for experimentation with different neural network architectures. The project
+          features a fully modular codebase, configuration-driven training, and a command-line
+          interface for switching between models and behaviors.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Why I Built It</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
