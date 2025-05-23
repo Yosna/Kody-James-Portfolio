@@ -64,7 +64,7 @@ export default function SynthesisTracker() {
           user-friendly tools for gamers and handling real-time data updates efficiently.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~1 week (December 14<sup>th</sup> - December 22<sup>nd</sup>, 2020)
+          Project duration: ~1.5 weeks (December 14<sup>th</sup> - December 22<sup>nd</sup>, 2020)
         </p>
         <a
           href="https://github.com/Yosna/FFXI-Synthesis-Tracker"

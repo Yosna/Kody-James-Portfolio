@@ -70,7 +70,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~4 days (May 12<sup>th</sup> - May 21<sup>st</sup>, 2025)
+          Project duration: ~1.5 weeks (May 12<sup>th</sup> - May 22<sup>nd</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -96,6 +96,7 @@ export default function TextGenerator() {
               <option value="README.md">&#x250C;&#x2500; README.md</option>
               <option value="main.py">&#x251C;&#x2500; main.py</option>
               <option value="utils.py">&#x251C;&#x2500; utils.py</option>
+              <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
               <optgroup label="&#x2514;&#x2500; /models">
                 <option value="models/registry.py">&#x251C;&#x2500; registry.py</option>
@@ -107,7 +108,10 @@ export default function TextGenerator() {
                 </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
-                <option value="tests/test_utils.py">&#x2514;&#x2500; test_utils.py</option>
+                <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
+                <option value="tests/test_visualizer.py">
+                  &#x2514;&#x2500; test_visualizer.py
+                </option>
               </optgroup>
             </select>
           </div>
