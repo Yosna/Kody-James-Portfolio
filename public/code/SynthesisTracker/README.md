@@ -13,7 +13,7 @@ Tracks synthesis information for items crafted, materials used, material loss ra
 ## How To Use
 
 - [Download ZIP](https://github.com/Yosna/FFXI-Synthesis-Tracker/archive/refs/heads/main.zip) and extract the **SynthesisTracker** folder to `\Windower\Addons`.
-- If you're unable to locate your Windower folder, right click `Windower.exe` and select _Open file location_.
+- If you're unable to locate your Windower folder, right click `Windower.exe` and select *Open file location*.
 - Type `//lua l synthesistracker` or `//lua load synthesistracker` into the game's chat, or into the Windower console if you omit the `//`.
 - Alternatively, navigate to `init.txt` located in `\Windower\Scripts` and add `lua load synthesistracker` at the bottom. Save the `.txt` file and then type `//reload` in the game's chat, or `reload` into the Windower console. The addon will now load automatically every time Windower is initialized.
 
@@ -25,15 +25,14 @@ Tracks synthesis information for items crafted, materials used, material loss ra
 - **`//st <export / e>`:** Export tracked synthesis results.
   - **Note:** Results are exported to `windower\addons\SynthesisTracker\Results\<Character>\<Item>\YYYY-MM-DD.log`
 - **`//st <autoexport>`:** Toggles auto-exporting for your tracked synthesis information (enabled by default)
-- **`//st <cost>`:** Set the cost of an item or material for gil tracking.
-  - **Arguments:**
+- **`//st <cost>`:** Set the cost of an item or material for gil tracking. 
+  - **Arguments:** 
     - `//st <cost> <item name> <item cost> <cost divisor (optional)>`
-  - **Examples:**
-    - Input: `//st cost cyan coral 1126125` > Output: `Cyan Coral >> Cost: 1,126,125.00`
+  - **Examples:** 
+    - Input: `//st cost cyan coral 1126125` > Output: `Cyan Coral >> Cost: 1,126,125.00` 
     - Input: `//st cost eschite ore 6000000 12` > Output: `Eschite Ore >> Cost: 500,000.00`
   - **Note:** You do not need to wrap the item name in quotes. Everything between `<cost>` and `<item cost>` is concatenated into a string.
-- **`//st file`:** Read a previously logged file in-game.
-
+- **`//st file`:** Read a previously logged file in-game. 
   - **Arguments:**
     - `//st <file> <character> <item name> <YYYY-MM-DD>`
   - **Examples:**
@@ -44,3 +43,5 @@ Tracks synthesis information for items crafted, materials used, material loss ra
   ## License
 
   This project is licensed under the MIT License. See [LICENSE](https://github.com/Yosna/FFXI-Synthesis-Tracker/blob/main/LICENSE) for details.
+
+

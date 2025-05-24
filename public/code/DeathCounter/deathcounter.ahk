@@ -5,8 +5,8 @@
 #Include utils.ahk
 #Include settings.ahk
 
-F8:: HideOverlay(overlay)
-F12:: ReloadProgram
+F8::HideOverlay(overlay)
+F12::ReloadProgram
 
 global window, overlay
 
@@ -41,7 +41,7 @@ CreateWindow() {
     ; this helps prevent elements from disappearing when the window is updated
     window.unfocus := window.AddText()
 
-    options := FormatOptions(, , WINDOW_WIDTH, WINDOW_HEIGHT)
+    options := FormatOptions(,,WINDOW_WIDTH, WINDOW_HEIGHT)
     window.Show(options)
 }
 
@@ -53,18 +53,18 @@ CreateOverlay() {
     overlay.BackColor := COLOR_BLACK
 
     ; options for the overlay
-    overlay.x := Floor(game.x + (game.w * OVERLAY_X_RATIO))
-    overlay.y := Floor(game.y + (game.h * OVERLAY_Y_RATIO))
-    overlay.w := Floor(game.w * OVERLAY_WIDTH)
-
+    overlay.x := Floor(game.x + (game.w * OVERLAY_X_RATIO)) 
+    overlay.y := Floor(game.y + (game.h * OVERLAY_Y_RATIO)) 
+    overlay.w := Floor(game.w * OVERLAY_WIDTH) 
+    
     ; add the text and make it click-and-draggable
     font := FormatFont(FONT_SIZE_18, COLOR_WHITE)
-    options := FormatOptions(, , overlay.w)
+    options := FormatOptions(,, overlay.w)
     overlay.SetFont(font)
     overlay.deaths := overlay.AddText(options, "Deaths: 0")
-    overlay.deaths.OnEvent("Click", (*) => PostMessage(0xA1, 2, , , "ahk_id " . overlay.Hwnd))
+    overlay.deaths.OnEvent("Click", (*) => PostMessage(0xA1, 2,,, "ahk_id " . overlay.Hwnd))
 
-    options := FormatOptions(overlay.x, overlay.y, overlay.w, , "NoActivate")
+    options := FormatOptions(overlay.x, overlay.y, overlay.w,, "NoActivate")
     overlay.Show(options)
 
     ; make the background color transparent
@@ -72,7 +72,7 @@ CreateOverlay() {
 }
 
 FormatOptions(x := "", y := "", w := "", h := "", extra := "") {
-    local options := ""
+    local options := "" 
         . (x ? " x" . x : "") . (y ? " y" . y : "")
         . (w ? " w" . w : "") . (h ? " h" . h : "")
         . (extra ? " " . extra : "")
@@ -132,7 +132,7 @@ InitializeGUI() {
     CreateOverlay()
     SetTimer(() => Update(), TICK_INTERVAL)
 
-    ; show the hotkeys only if a new session is launched
+    ; show the hotkeys only if a new session is launched 
     ; the delay is to ensure the hotkeys appear on top of the window
     (!A_Args.Length) ? SetTimer(() => ShowHotkeys(), -HOTKEY_INTERVAL) : ""
 }

@@ -30,10 +30,10 @@ export default function TextGenerator() {
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Overview:</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
           Multi-Model AI Text Generator is a modular, extensible text generation project built with
-          PyTorch. It supports a simple bigram model, plus both LSTM and transformer models,
-          allowing for experimentation with different neural network architectures. The project
-          features a fully modular codebase, configuration-driven training, and a command-line
-          interface for switching between models and behaviors.
+          PyTorch. It supports a bigram, LSTM and transformer models, allowing for experimentation
+          with different neural network architectures. The project features a fully modular
+          codebase, configuration-driven training, and a command-line interface for switching
+          between models and behaviors.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Why I Built It</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
@@ -47,7 +47,7 @@ export default function TextGenerator() {
         <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
           <li>Loads and tokenizes text data from multiple files for training.</li>
           <li>
-            Supports both bigram LSTM, and transformer models, selectable via CLI and configuration.
+            Supports bigram LSTM, and transformer models, selectable via CLI and configuration.
           </li>
           <li>Modular model registry allows easy addition of new architectures.</li>
           <li>
@@ -95,6 +95,7 @@ export default function TextGenerator() {
             >
               <option value="README.md">&#x250C;&#x2500; README.md</option>
               <option value="main.py">&#x251C;&#x2500; main.py</option>
+              <option value="library.py">&#x251C;&#x2500; library.py</option>
               <option value="utils.py">&#x251C;&#x2500; utils.py</option>
               <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
@@ -108,6 +109,7 @@ export default function TextGenerator() {
                 </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
+                <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
                 <option value="tests/test_visualizer.py">
                   &#x2514;&#x2500; test_visualizer.py

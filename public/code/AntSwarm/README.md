@@ -1,6 +1,6 @@
 # Ant Swarm (Text-Based Incremental Game)
 
-**Ant Swarm** is a text-based incremental game written in HTML, CSS, and vanilla JavaScript. The goal was to build a live, fully functional idle game. The deployed version includes an upgrade system, tooltip-based UI, save/load persistence, modal handling, and dynamic game logic—intentionally written from scratch without the use of external frameworks such as React or Vue.
+**Ant Swarm** is a text-based incremental game written in HTML, CSS, and vanilla JavaScript. The goal was to build a live, fully functional idle game. The deployed version includes an upgrade system, tooltip-based UI, save/load persistence, modal handling, and dynamic game logic — intentionally written from scratch without the use of external frameworks such as React or Vue.
 
 ## Features
 
