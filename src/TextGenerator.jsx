@@ -70,7 +70,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~1.5 weeks (May 12<sup>th</sup> - May 22<sup>nd</sup>, 2025)
+          Project duration: ~1.5 weeks (May 12<sup>th</sup> - May 23<sup>rd</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
