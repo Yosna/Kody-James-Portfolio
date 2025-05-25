@@ -110,6 +110,9 @@ export default function TextGenerator() {
                 </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
+                <option value="tests/test_base_model.py">
+                  &#x251C;&#x2500; test_base_model.py
+                </option>
                 <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_training.py">&#x251C;&#x2500; test_training.py</option>
                 <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
