@@ -32,22 +32,25 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main(args: argparse.Namespace) -> None:
+def main(args: argparse.Namespace, cfg_path: str) -> None:
     """Prepare data, initialize model, and run training or generation."""
     model_name = args.model.lower()
-    datasets = get_config("config.json", "datasets")
+    datasets = get_config(cfg_path, "datasets")
     text = get_dataset(datasets["source"], datasets["locations"])
     chars, vocab_size = build_vocab(text)
     stoi, itos = create_mappings(chars)
     data = encode_data(text, stoi)
-    config = get_config("config.json", model_name)
-    model = get_model(ModelRegistry, model_name, vocab_size, **config["model"])
+    config = get_config(cfg_path, model_name)
+    model = get_model(
+        ModelRegistry, model_name, cfg_path, vocab_size, **config["model"]
+    )
 
-    validate_model(model, data, stoi, itos, **config["runtime"])
+    validate_model(model, text, data, stoi, itos, **config["runtime"])
 
 
 def validate_model(
     model: nn.Module,
+    text: str,
     data: torch.Tensor,
     stoi: dict[str, int],
     itos: dict[int, str],
@@ -55,7 +58,7 @@ def validate_model(
 ) -> None:
     """Validate the type of model to determine the appropriate run method."""
     if model.name == "transformer":
-        generated_text = model.run(data, itos, **config)
+        generated_text = model.run(text, **config)
         print(generated_text)
     else:
         run_model(model, data, stoi, itos, **config)
@@ -81,7 +84,10 @@ def run_model(
     Loads from checkpoint if available. Randomizes seed character for generation.
     """
     if os.path.exists(model.ckpt_path):
-        model.load_state_dict(torch.load(model.ckpt_path))
+        try:
+            model.load_state_dict(torch.load(model.ckpt_path))
+        except Exception as e:
+            print(f"Error loading model: {e}")
 
     if training:
         train(
@@ -103,4 +109,4 @@ def run_model(
 
 
 if __name__ == "__main__":
-    main(parse_args())
+    main(parse_args(), "config.json")
