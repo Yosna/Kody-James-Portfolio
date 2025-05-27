@@ -19,13 +19,14 @@ class LSTMLanguageModel(BaseLanguageModel):
 
     def __init__(
         self,
+        cfg_path: str,
         vocab_size: int,
         embedding_dim: int = 64,
         hidden_size: int = 128,
         num_layers: int = 2,
     ) -> None:
         """Initialize the LSTM model and its parameters."""
-        super().__init__(vocab_size, model_name="lstm")
+        super().__init__(model_name="lstm", cfg_path=cfg_path, vocab_size=vocab_size)
 
         self.embedding_dim = embedding_dim
         self.hidden_size = hidden_size
@@ -45,11 +46,15 @@ class LSTMLanguageModel(BaseLanguageModel):
 
     def __repr__(self) -> str:
         """Return a string representation of the model."""
-        return (
-            f"LSTMLanguageModel(vocab_size={self.vocab_size}, "
-            f"embedding_dim={self.embedding_dim}, hidden_size={self.hidden_size}, "
-            f"num_layers={self.num_layers})"
+        output = (
+            f"LSTMLanguageModel(\n"
+            f"\tvocab_size={self.vocab_size},\n"
+            f"\tembedding_dim={self.embedding_dim},\n"
+            f"\thidden_size={self.hidden_size},\n"
+            f"\tnum_layers={self.num_layers}\n"
+            f")"
         )
+        return output.expandtabs(4)
 
     def forward(
         self,
@@ -111,6 +116,6 @@ class LSTMLanguageModel(BaseLanguageModel):
             next_idx = self.new_token(logits)
             # Prepare input for next iteration
             idx = next_idx
-            generated.append(next_idx[0, 0].item())
+            generated.append(next_idx.item())
 
         return decode_data(generated, itos)

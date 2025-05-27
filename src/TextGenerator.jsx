@@ -70,7 +70,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~1.5 weeks (May 12<sup>th</sup> - May 24<sup>th</sup>, 2025)
+          Project duration: ~1.5 weeks (May 12<sup>th</sup> - May 27<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -110,14 +110,23 @@ export default function TextGenerator() {
                 </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
-                <option value="tests/test_base_model.py">
-                  &#x251C;&#x2500; test_base_model.py
-                </option>
+                <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
                 <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_training.py">&#x251C;&#x2500; test_training.py</option>
                 <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
                 <option value="tests/test_visualizer.py">
-                  &#x2514;&#x2500; test_visualizer.py
+                  &#x251C;&#x2500; test_visualizer.py
+                </option>
+                <option value="tests/test_registry.py">&#x251C;&#x2500; test_registry.py</option>
+                <option value="tests/test_base_model.py">&#x251C;&#x2500; base_model.py</option>
+                <option value="tests/test_bigram_model.py">
+                  &#x251C;&#x2500; test_bigram_model.py
+                </option>
+                <option value="tests/test_lstm_model.py">
+                  &#x251C;&#x2500; test_lstm_model.py
+                </option>
+                <option value="tests/test_transformer_model.py">
+                  &#x2514;&#x2500; test_transformer_model.py
                 </option>
               </optgroup>
             </select>

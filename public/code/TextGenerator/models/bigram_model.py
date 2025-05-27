@@ -17,16 +17,17 @@ class BigramLanguageModel(BaseLanguageModel):
     character when making predictions.
     """
 
-    def __init__(self, vocab_size: int) -> None:
+    def __init__(self, cfg_path: str, vocab_size: int) -> None:
         """Initialize the bigram model and its parameters."""
-        super().__init__(vocab_size, model_name="bigram")
+        super().__init__(model_name="bigram", cfg_path=cfg_path, vocab_size=vocab_size)
         # Each character gets a vector of size vocab_size
         # Character predictions are learned via probability distribution
         self.embedding = nn.Embedding(vocab_size, vocab_size)
 
     def __repr__(self) -> str:
         """Return a string representation of the model."""
-        return f"BigramLanguageModel(vocab_size={self.vocab_size})"
+        output = f"BigramLanguageModel(\n\tvocab_size={self.vocab_size}\n)"
+        return output.expandtabs(4)
 
     def forward(
         self, idx: torch.Tensor, targets: torch.Tensor | None = None
@@ -70,6 +71,6 @@ class BigramLanguageModel(BaseLanguageModel):
             # Get predictions for next step
             logits, _ = self(idx)
             next_idx = self.new_token(logits)
-            generated.append(next_idx[0, 0].item())
+            generated.append(next_idx.item())
 
         return decode_data(generated, itos)
