@@ -45,22 +45,34 @@ export default function TextGenerator() {
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">How It Works</h2>
         <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
-          <li>Loads and tokenizes text data from multiple files for training.</li>
           <li>
-            Supports bigram LSTM, and transformer models, selectable via CLI and configuration.
+            Loads and tokenizes text data from local files or HuggingFace datasets for training.
+          </li>
+          <li>
+            Supports bigram, LSTM, and transformer models, selectable via CLI and configuration.
           </li>
           <li>Modular model registry allows easy addition of new architectures.</li>
           <li>
             Training, validation, and generation are all configurable through a single{' '}
             <code>config.json</code> file.
           </li>
-          <li>Implements checkpointing, early stopping, and resumption for robust training.</li>
-          <li>Includes a full suite of unit tests for utility functions.</li>
+          <li>
+            Implements checkpointing, early stopping, pruning, and resumption for robust training.
+          </li>
+          <li>
+            Includes automatic hyperparameter tuning using Optuna with pruning and warmup step
+            control.
+          </li>
+          <li>
+            Features a complete test suite with <strong>96% coverage</strong> (67 unit tests—427
+            stmts / 19 miss).
+          </li>
           <li>
             Generates text by sampling from trained models, with support for multinomial sampling
             and random seed selection.
           </li>
         </ul>
+
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">What I Learned</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
           Through this project, I learned how to design and refactor a codebase for modularity and
@@ -70,7 +82,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~2 weeks (May 12<sup>th</sup> - May 29<sup>th</sup>, 2025)
+          Project duration: ~2 weeks (May 12<sup>th</sup> - May 31<sup>st</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -97,6 +109,7 @@ export default function TextGenerator() {
               <option value="main.py">&#x251C;&#x2500; main.py</option>
               <option value="library.py">&#x251C;&#x2500; library.py</option>
               <option value="training.py">&#x251C;&#x2500; training.py</option>
+              <option value="tuning.py">&#x251C;&#x2500; tuning.py</option>
               <option value="utils.py">&#x251C;&#x2500; utils.py</option>
               <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
@@ -113,6 +126,7 @@ export default function TextGenerator() {
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
                 <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_training.py">&#x251C;&#x2500; test_training.py</option>
+                <option value="tests/test_tuning.py">&#x251C;&#x2500; test_tuning.py</option>
                 <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
                 <option value="tests/test_visualizer.py">
                   &#x251C;&#x2500; test_visualizer.py
