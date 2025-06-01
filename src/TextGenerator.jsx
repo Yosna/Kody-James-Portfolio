@@ -30,10 +30,10 @@ export default function TextGenerator() {
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Overview:</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
           Multi-Model AI Text Generator is a modular, extensible text generation project built with
-          PyTorch. It supports a bigram, LSTM and transformer models, allowing for experimentation
-          with different neural network architectures. The project features a fully modular
-          codebase, configuration-driven training, and a command-line interface for switching
-          between models and behaviors.
+          PyTorch. It supports bigram, LSTM, GRU, and transformer models, allowing for
+          experimentation with different neural network architectures. The project features a fully
+          modular codebase, configuration-driven training, and a command-line interface for
+          switching between models and behaviors.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Why I Built It</h2>
         <p className="mb-4 leading-relaxed text-gray-200">
@@ -49,12 +49,13 @@ export default function TextGenerator() {
             Loads and tokenizes text data from local files or HuggingFace datasets for training.
           </li>
           <li>
-            Supports bigram, LSTM, and transformer models, selectable via CLI and configuration.
+            Supports bigram, LSTM, GRU, and transformer models, selectable via CLI and
+            configuration.
           </li>
           <li>Modular model registry allows easy addition of new architectures.</li>
           <li>
-            Training, validation, and generation are all configurable through a single{' '}
-            <code>config.json</code> file.
+            Training, validation, generation, visualization, and hyperparameter optimization are all
+            configurable through a single <code>config.json</code> file.
           </li>
           <li>
             Implements checkpointing, early stopping, pruning, and resumption for robust training.
@@ -64,12 +65,12 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>96% coverage</strong> (67 unit tests—427
-            stmts / 19 miss).
+            Features a complete test suite with <strong>97% coverage</strong> (85 unit tests—470
+            stmts / 14 miss).
           </li>
           <li>
-            Generates text by sampling from trained models, with support for multinomial sampling
-            and random seed selection.
+            Generates text by sampling from trained models using multinomial sampling and random
+            seed selection.
           </li>
         </ul>
 
@@ -82,7 +83,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~2 weeks (May 12<sup>th</sup> - May 31<sup>st</sup>, 2025)
+          Project duration: ~3 weeks (May 12<sup>th</sup> - May 31<sup>st</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -118,6 +119,7 @@ export default function TextGenerator() {
                 <option value="models/base_model.py">&#x251C;&#x2500; base_model.py</option>
                 <option value="models/bigram_model.py">&#x251C;&#x2500; bigram_model.py</option>
                 <option value="models/lstm_model.py">&#x251C;&#x2500; lstm_model.py</option>
+                <option value="models/gru_model.py">&#x251C;&#x2500; gru_model.py</option>
                 <option value="models/transformer_model.py">
                   &#x2514;&#x2500; transformer_model.py
                 </option>
@@ -139,6 +141,7 @@ export default function TextGenerator() {
                 <option value="tests/test_lstm_model.py">
                   &#x251C;&#x2500; test_lstm_model.py
                 </option>
+                <option value="tests/test_gru_model.py">&#x251C;&#x2500; test_gru_model.py</option>
                 <option value="tests/test_transformer_model.py">
                   &#x2514;&#x2500; test_transformer_model.py
                 </option>
