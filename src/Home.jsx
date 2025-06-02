@@ -32,8 +32,9 @@ export default function Home() {
             time.
           </li>
           <li>
-            <b>Multi-Model AI Text Generator</b> - A modular, extensible framework supporting both
-            bigram and LSTM models, with full unit testing and configuration-driven design.
+            <b>Multi-Model AI Text Generator</b> - A modular, extensible framework supporting
+            bigram, LSTM, GRU, and transformer models, with full unit testing and
+            configuration-driven design.
           </li>
           <li>
             <b>Bigram Language Model</b> - A character-level neural network for text generation in
