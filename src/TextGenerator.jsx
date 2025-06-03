@@ -83,7 +83,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~3 weeks (May 12<sup>th</sup> - June 2<sup>nd</sup>, 2025)
+          Project duration: ~3 weeks (May 12<sup>th</sup> - June 3<sup>rd</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -108,6 +108,7 @@ export default function TextGenerator() {
             >
               <option value="README.md">&#x250C;&#x2500; README.md</option>
               <option value="main.py">&#x251C;&#x2500; main.py</option>
+              <option value="cli.py">&#x251C;&#x2500; cli.py</option>
               <option value="library.py">&#x251C;&#x2500; library.py</option>
               <option value="training.py">&#x251C;&#x2500; training.py</option>
               <option value="tuning.py">&#x251C;&#x2500; tuning.py</option>
@@ -126,6 +127,7 @@ export default function TextGenerator() {
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
+                <option value="tests/test_cli.py">&#x251C;&#x2500; test_cli.py</option>
                 <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_training.py">&#x251C;&#x2500; test_training.py</option>
                 <option value="tests/test_tuning.py">&#x251C;&#x2500; test_tuning.py</option>
