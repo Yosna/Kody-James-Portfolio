@@ -65,8 +65,8 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>97% coverage</strong> (85 unit tests—470
-            stmts / 14 miss).
+            Features a complete test suite with <strong>98% coverage</strong> (95 unit tests—544
+            stmts / 10 miss).
           </li>
           <li>
             Generates text by sampling from trained models using multinomial sampling and random
