@@ -65,8 +65,8 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>98% coverage</strong> (95 unit tests—544
-            stmts / 10 miss).
+            Features a complete test suite with <strong>98% coverage</strong> (111 unit 615 stmts /
+            10 miss).
           </li>
           <li>
             Generates text by sampling from trained models using multinomial sampling and random
@@ -83,7 +83,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~3 weeks (May 12<sup>th</sup> - June 3<sup>rd</sup>, 2025)
+          Project duration: ~3 weeks (May 12<sup>th</sup> - June 8<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -124,6 +124,9 @@ export default function TextGenerator() {
                 <option value="models/transformer_model.py">
                   &#x2514;&#x2500; transformer_model.py
                 </option>
+                <option value="models/distilgpt2_model.py">
+                  &#x2514;&#x2500; distilgpt2_model.py
+                </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
@@ -146,6 +149,9 @@ export default function TextGenerator() {
                 <option value="tests/test_gru_model.py">&#x251C;&#x2500; test_gru_model.py</option>
                 <option value="tests/test_transformer_model.py">
                   &#x2514;&#x2500; test_transformer_model.py
+                </option>
+                <option value="tests/test_distilgpt2_model.py">
+                  &#x2514;&#x2500; test_distilgpt2_model.py
                 </option>
               </optgroup>
             </select>
