@@ -21,22 +21,34 @@ from typing import TypeVar, Any, cast
 T = TypeVar("T")
 
 
-def build_vocab(text: str) -> tuple[list[str], int]:
+def build_vocab(
+    text: str, token_level: str = "char"
+) -> tuple[list[str], list[str], int]:
     """
     Build a sorted character vocabulary from text and return it with its size.
 
     Args:
         text (str): Input text.
-
+        token_level (str): Token level to use for vocabulary building.
+            Options: "char" (default), or "word".
     Returns:
-        tuple[list[str], int]: Sorted list of unique characters and vocabulary size.
+        tuple[list[str], list[str], int]:
+            Sorted list of unique tokens, sorted list of unique characters,
+            and vocabulary size.
     """
-    chars = sorted(set(text))
-    vocab_size = len(chars)
-    return chars, vocab_size
+    if token_level == "char":
+        tokens = list(text)
+    elif token_level == "word":
+        tokens = text.split()
+    else:
+        raise ValueError(f"Invalid token level: {token_level}")
+
+    vocab = sorted(set(tokens))
+    vocab_size = len(vocab)
+    return tokens, vocab, vocab_size
 
 
-def create_mappings(chars: list[str]) -> tuple[dict[str, int], dict[int, str]]:
+def create_mappings(tokens: list[str]) -> tuple[dict[str, int], dict[int, str]]:
     """
     Create character-to-index and index-to-character mappings.
 
@@ -46,39 +58,42 @@ def create_mappings(chars: list[str]) -> tuple[dict[str, int], dict[int, str]]:
     Returns:
         tuple[dict[str, int], dict[int, str]]: stoi and itos mappings.
     """
-    stoi = {ch: i for i, ch in enumerate(chars)}
-    itos = {i: ch for i, ch in enumerate(chars)}
+    stoi = {token: i for i, token in enumerate(tokens)}
+    itos = {i: token for i, token in enumerate(tokens)}
     return stoi, itos
 
 
-def encode_data(text: str, stoi: dict[str, int]) -> torch.Tensor:
+def encode_data(tokens: list[str], stoi: dict[str, int]) -> torch.Tensor:
     """
     Encode text into a tensor of integer indices using the provided mapping.
 
     Args:
-        text (str): Input text.
+        tokens (list[str]): Input tokens.
         stoi (dict[str, int]): Character-to-index mapping.
 
     Returns:
         torch.Tensor: Encoded tensor of indices (dtype=torch.long).
     """
-    encoded = [stoi[c] for c in text]
+    encoded = [stoi[t] for t in tokens]
     data = torch.tensor(encoded, dtype=torch.long)
     return data
 
 
-def decode_data(data: torch.Tensor, itos: dict[int, str]) -> str:
+def decode_data(data: torch.Tensor, itos: dict[int, str], token_level: str) -> str:
     """
     Decode a tensor of integer indices back into a string using the mapping.
 
     Args:
         data (torch.Tensor): Tensor of indices.
         itos (dict[int, str]): Index-to-character mapping.
+        token_level (str): Token level to use for vocabulary building.
+            Options: "char" (default), or "word"
 
     Returns:
         str: Decoded string.
     """
-    decoded = "".join([itos[i] for i in data.tolist()])
+    separator = " " if token_level == "word" else ""
+    decoded = separator.join([itos[i] for i in data.tolist()])
     return decoded
 
 
@@ -191,7 +206,7 @@ def load_config(path: str) -> dict[str, Any]:
         return json.load(f)
 
 
-def get_config(path: str, config_name: str) -> dict[str, Any]:
+def get_config(path: str, config_name: str) -> Any:
     """
     Load and return the configuration dictionary for the given model.
 
@@ -221,6 +236,7 @@ def get_model(
     config: dict[str, Any],
     cfg_path: str,
     vocab_size: int,
+    token_level: str,
 ) -> BaseLM:
     """
     Create and return a language model based on the specified model type.
@@ -231,6 +247,8 @@ def get_model(
         config (dict[str, Any]): Configuration dictionary for all models.
         cfg_path (str): Path to the config file.
         vocab_size (int): Vocabulary size (not used for transformer).
+        token_level (str): Token level to use for vocabulary building.
+            Options: "char" (default), or "word"
 
     Returns:
         BaseLM: Instantiated language model.
@@ -239,13 +257,15 @@ def get_model(
         ValueError: If model_name is not recognized.
     """
     if model_name == "bigram":
-        model = models.BigramLM(config[model_name], cfg_path, vocab_size)
+        model = models.BigramLM(config[model_name], cfg_path, vocab_size, token_level)
     elif model_name == "lstm":
-        model = models.LSTMLM(config[model_name], cfg_path, vocab_size)
+        model = models.LSTMLM(config[model_name], cfg_path, vocab_size, token_level)
     elif model_name == "gru":
-        model = models.GRULM(config[model_name], cfg_path, vocab_size)
+        model = models.GRULM(config[model_name], cfg_path, vocab_size, token_level)
     elif model_name == "transformer":
-        model = models.TransformerLM(config[model_name], cfg_path, vocab_size)
+        model = models.TransformerLM(
+            config[model_name], cfg_path, vocab_size, token_level
+        )
     elif model_name == "distilgpt2":
         model = models.DistilGPT2LM(config[model_name], cfg_path)
     else:

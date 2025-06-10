@@ -1,4 +1,5 @@
 from models.registry import ModelRegistry as Model
+import pytest
 import torch
 import torch.nn as nn
 import os
@@ -26,8 +27,9 @@ class BaseLanguageModel(Model.BaseLM):
         config: dict[str, Any] = get_runtime_config(),
         cfg_path: str = "config.json",
         vocab_size: int = 10,
+        token_level: str = "char",
     ):
-        super().__init__(model_name, config, cfg_path, vocab_size)
+        super().__init__(model_name, config, cfg_path, vocab_size, token_level)
         self.embedding = nn.Embedding(vocab_size, vocab_size)
 
     def forward(self, idx):
@@ -90,3 +92,11 @@ def test_base_model_new_token():
     assert next_idx.shape == torch.Size([1, 1])
     assert model.vocab_size is not None
     assert next_idx.item() in range(model.vocab_size)
+
+
+def test_not_implemented_methods():
+    model = Model.BaseLM(model_name="mock", config={})
+    with pytest.raises(NotImplementedError):
+        model.generate()
+    with pytest.raises(NotImplementedError):
+        model.run()

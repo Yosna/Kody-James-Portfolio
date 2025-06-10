@@ -19,6 +19,7 @@
   },
 
   "save_model": true,
+  "token_level": "word",
   "models": {
     "bigram": {
       "runtime": {

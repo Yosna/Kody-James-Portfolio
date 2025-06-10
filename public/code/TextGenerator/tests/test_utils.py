@@ -1,4 +1,5 @@
 from models.registry import ModelRegistry as Model
+import pytest
 import torch
 import os
 import json
@@ -42,6 +43,7 @@ def get_models_config():
 def get_test_config():
     return {
         "save_model": True,
+        "token_level": "char",
         "models": {
             "bigram": get_models_config(),
             "lstm": get_models_config(),
@@ -85,10 +87,23 @@ def build_file(tmp_path, file_name, content):
     return file
 
 
-def test_build_vocab():
-    chars, vocab_size = build_vocab("Hello, World!")
-    assert chars == [" ", "!", ",", "H", "W", "d", "e", "l", "o", "r"]
+def test_build_vocab_char():
+    tokens, vocab, vocab_size = build_vocab("Hello, World!", token_level="char")
+    assert tokens == ["H", "e", "l", "l", "o", ",", " ", "W", "o", "r", "l", "d", "!"]
+    assert vocab == [" ", "!", ",", "H", "W", "d", "e", "l", "o", "r"]
     assert vocab_size == 10
+
+
+def test_build_vocab_word():
+    tokens, vocab, vocab_size = build_vocab("Hello, World!", token_level="word")
+    assert tokens == ["Hello,", "World!"]
+    assert vocab == ["Hello,", "World!"]
+    assert vocab_size == 2
+
+
+def test_build_vocab_errors():
+    with pytest.raises(ValueError):
+        build_vocab("Hello, World!", token_level="invalid")
 
 
 def test_create_mappings():
@@ -99,16 +114,23 @@ def test_create_mappings():
 
 def test_encode_data():
     stoi = {"!": 0, "H": 1, "e": 2, "l": 3, "o": 4}
-    data = encode_data("Hello!", stoi)
+    data = encode_data(list("Hello!"), stoi)
     assert data.tolist() == [1, 2, 3, 3, 4, 0]
     assert data.dtype == torch.long
 
 
-def test_decode_data():
+def test_decode_data_char():
     itos = {0: "!", 1: "H", 2: "e", 3: "l", 4: "o"}
     data = torch.tensor([1, 2, 3, 3, 4, 0])
-    decoded = decode_data(data, itos)
+    decoded = decode_data(data, itos, "char")
     assert decoded == "Hello!"
+
+
+def test_decode_data_word():
+    itos = {0: "Hello,", 1: "World!"}
+    data = torch.tensor([0, 1])
+    decoded = decode_data(data, itos, "word")
+    assert decoded == "Hello, World!"
 
 
 def test_split_data():
@@ -153,26 +175,18 @@ def test_get_config(tmp_path):
 
 def test_get_config_errors(tmp_path):
     cfg_path = build_file(tmp_path, "config.json", '{"invalid_value": null}')
-    value_error_triggered = False
-    key_error_triggered = False
-    try:
+    with pytest.raises(ValueError):
         get_config(cfg_path, "invalid_value")
-    except ValueError:
-        value_error_triggered = True
-    try:
+    with pytest.raises(KeyError):
         get_config(cfg_path, "invalid_key")
-    except KeyError:
-        key_error_triggered = True
-    assert value_error_triggered
-    assert key_error_triggered
 
 
 def test_get_model():
     config = get_test_config()["models"]
-    bigram = get_model(Model, "bigram", config, "config.json", 10)
-    lstm = get_model(Model, "lstm", config, "config.json", 10)
-    gru = get_model(Model, "gru", config, "config.json", 10)
-    distilgpt2 = get_model(Model, "distilgpt2", config, "config.json", 10)
+    bigram = get_model(Model, "bigram", config, "config.json", 10, "char")
+    lstm = get_model(Model, "lstm", config, "config.json", 10, "char")
+    gru = get_model(Model, "gru", config, "config.json", 10, "char")
+    distilgpt2 = get_model(Model, "distilgpt2", config, "config.json", 10, "char")
     assert bigram.__class__.__name__ == "BigramLanguageModel"
     assert lstm.__class__.__name__ == "LSTMLanguageModel"
     assert gru.__class__.__name__ == "GRULanguageModel"
@@ -181,12 +195,8 @@ def test_get_model():
 
 def test_get_model_error():
     config = get_test_config()["models"]
-    value_error_triggered = False
-    try:
-        get_model(Model, "test", config, "config.json", 10)
-    except ValueError:
-        value_error_triggered = True
-    assert value_error_triggered
+    with pytest.raises(ValueError):
+        get_model(Model, "test", config, "config.json", 10, "char")
 
 
 def test_save_checkpoint(tmp_path):

@@ -1,6 +1,7 @@
+from models.registry import ModelRegistry as Model
+import pytest
 import torch
 import torch.nn as nn
-from models.bigram_model import BigramLanguageModel
 from typing import Any
 
 
@@ -25,8 +26,9 @@ def get_bigram_model(
     config: dict[str, Any] = get_bigram_config(),
     cfg_path: str = "test_config.json",
     vocab_size: int = 10,
+    token_level: str = "char",
 ):
-    return BigramLanguageModel(config, cfg_path, vocab_size)
+    return Model.BigramLM(config, cfg_path, vocab_size, token_level)
 
 
 def test_bigram_model():
@@ -34,15 +36,21 @@ def test_bigram_model():
     assert model is not None
 
 
-def test_bigram_model_no_vocab():
-    model_not_initialized = False
-    try:
-        BigramLanguageModel(
-            config=get_bigram_config(), cfg_path="test_config.json", vocab_size=0
+def test_bigram_model_vocab_errors():
+    with pytest.raises(ValueError):
+        Model.BigramLM(
+            config=get_bigram_config(),
+            cfg_path="test_config.json",
+            vocab_size=0,
+            token_level="char",
         )
-    except ValueError:
-        model_not_initialized = True
-    assert model_not_initialized
+    with pytest.raises(ValueError):
+        Model.BigramLM(
+            config=get_bigram_config(),
+            cfg_path="test_config.json",
+            vocab_size=100000,
+            token_level="char",
+        )
 
 
 def test_bigram_model_init():

@@ -1,4 +1,5 @@
 from models.registry import ModelRegistry as Model
+import pytest
 import torch
 import torch.nn as nn
 
@@ -31,6 +32,7 @@ def get_transformer_model():
         config=get_transformer_config(),
         cfg_path="test_config.json",
         vocab_size=5,
+        token_level="char",
     )
 
 
@@ -39,17 +41,14 @@ def test_transformer_model():
     assert model is not None
 
 
-def test_transformer_model_no_vocab():
-    model_not_initialized = False
-    try:
+def test_transformer_model_no_vocab_size():
+    with pytest.raises(ValueError):
         Model.TransformerLM(
             config=get_transformer_config(),
             cfg_path="test_config.json",
             vocab_size=0,
+            token_level="char",
         )
-    except ValueError:
-        model_not_initialized = True
-    assert model_not_initialized
 
 
 def test_transformer_model_init():
