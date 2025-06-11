@@ -41,7 +41,7 @@ export default function TextGenerator() {
           expanding the project into a more modular, multi-model framework. I decided to add this as
           a fifth project to my portfolio to showcase my decision-making, the process of turning a
           single script into a scalable codebase, and my ability to implement new features, refactor
-          code, and add unit testing—all within a short timeframe.
+          code, and add unit testing.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">How It Works</h2>
         <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
@@ -83,7 +83,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-gray-400 italic">
-          Project duration: ~1 month (May 12<sup>th</sup> - June 9<sup>th</sup>, 2025)
+          Project duration: ~1 month (May 12<sup>th</sup> - June 10<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
