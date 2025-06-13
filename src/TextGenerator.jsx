@@ -65,7 +65,7 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (118 unit 625 stmts /
+            Features a complete test suite with <strong>100% coverage</strong> (129 unit 666 stmts /
             0 miss).
           </li>
           <li>
