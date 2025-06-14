@@ -1,22 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useThemeMode } from './hooks/useThemeMode';
-import { useProjectFile } from './hooks/useProjectFile';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula as darkSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { coy as lightSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as displayUtils from './utils/displayUtils';
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
-import { getLanguageFromFilename } from './utils/codeUtils';
-import ReactMarkdown from 'react-markdown';
 
-SyntaxHighlighter.registerLanguage('python', python);
+displayUtils.SyntaxHighlighter.registerLanguage('python', python);
 
 export default function BigramModel() {
-  const { selectedFile, setSelectedFile, fileContent } = useProjectFile('BigramModel');
+  const { selectedFile, setSelectedFile, fileContent } = displayUtils.useProjectFile('BigramModel');
 
   const isMarkdown = selectedFile.endsWith('.md');
-  const theme = useThemeMode();
-  const isDark = theme === 'dark';
-  const syntaxStyle = isDark ? darkSyntaxStyle : lightSyntaxStyle;
+  const theme = displayUtils.useThemeMode();
+  const syntaxStyles = displayUtils.syntaxStyles;
+  const syntaxStyle = syntaxStyles[theme] || syntaxStyles.light;
 
   return (
     <div className="flex flex-col lg:flex-row h-full w-full bg-primary text-primary">
@@ -96,11 +89,11 @@ export default function BigramModel() {
           <div className="w-full h-full overflow-auto">
             {isMarkdown ? (
               <div className="prose prose-invert leading-snug max-w-[96%]">
-                <ReactMarkdown>{fileContent}</ReactMarkdown>
+                <displayUtils.ReactMarkdown>{fileContent}</displayUtils.ReactMarkdown>
               </div>
             ) : (
-              <SyntaxHighlighter
-                language={getLanguageFromFilename(selectedFile)}
+              <displayUtils.SyntaxHighlighter
+                language={displayUtils.getLanguageFromFilename(selectedFile)}
                 style={syntaxStyle}
                 showLineNumbers={true}
                 lineNumberStyle={{
@@ -111,7 +104,7 @@ export default function BigramModel() {
                 className="syntax-highlighter text-sm"
               >
                 {fileContent}
-              </SyntaxHighlighter>
+              </displayUtils.SyntaxHighlighter>
             )}
           </div>
         </div>

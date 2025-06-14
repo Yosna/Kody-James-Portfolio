@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 
 export function useThemeMode() {
-  const [theme, setTheme] = useState(document.body.classList.contains('dark') ? 'dark' : 'light');
+  const themes = ['light', 'dark', 'midnight', 'glacier'];
+  const getCurrentTheme = () => {
+    return themes.find((t) => document.body.classList.contains(t)) || 'light';
+  };
+  const [theme, setTheme] = useState(getCurrentTheme());
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      setTheme(document.body.classList.contains('dark') ? 'dark' : 'light');
+      setTheme(getCurrentTheme());
     });
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     return () => observer.disconnect();

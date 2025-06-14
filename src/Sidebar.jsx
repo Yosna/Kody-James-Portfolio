@@ -5,14 +5,16 @@ export default function Sidebar() {
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
 
+  const themes = ['light', 'dark', 'midnight', 'glacier'];
+
   // Get current theme from body class
-  const currentTheme = document.body.classList.contains('dark') ? 'Dark' : 'Light';
+  const currentTheme = themes.find((t) => document.body.classList.contains(t)) || 'light';
 
   // Function to set theme
   const setTheme = (theme) => {
-    document.body.classList.remove('dark', 'light');
-    document.body.classList.add(theme.toLowerCase());
-    localStorage.setItem('color-theme', theme.toLowerCase()); // Save to localStorage
+    document.body.classList.remove(currentTheme);
+    document.body.classList.add(theme);
+    localStorage.setItem('color-theme', theme); // Save to localStorage
     setThemeDropdownOpen(false);
   };
 
@@ -22,7 +24,9 @@ export default function Sidebar() {
     if (!savedTheme) {
       savedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    document.body.classList.remove('dark', 'light');
+    themes.forEach((t) => {
+      document.body.classList.remove(t);
+    });
     document.body.classList.add(savedTheme);
   }, []);
 
@@ -100,16 +104,28 @@ export default function Sidebar() {
         {themeDropdownOpen && (
           <div className="absolute bottom-16 w-[50%] bg-primary border border-muted rounded shadow z-10 flex flex-col">
             <button
-              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'Light' ? 'font-bold text-accent' : ''}`}
-              onClick={() => setTheme('Light')}
+              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'light' ? 'font-bold text-accent' : ''}`}
+              onClick={() => setTheme('light')}
             >
               Light
             </button>
             <button
-              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'Dark' ? 'font-bold text-accent' : ''}`}
-              onClick={() => setTheme('Dark')}
+              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'dark' ? 'font-bold text-accent' : ''}`}
+              onClick={() => setTheme('dark')}
             >
               Dark
+            </button>
+            <button
+              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'midnight' ? 'font-bold text-accent' : ''}`}
+              onClick={() => setTheme('midnight')}
+            >
+              Midnight
+            </button>
+            <button
+              className={`p-2 hover:bg-hover text-center rounded ${currentTheme === 'glacier' ? 'font-bold text-accent' : ''}`}
+              onClick={() => setTheme('glacier')}
+            >
+              Glacier
             </button>
           </div>
         )}

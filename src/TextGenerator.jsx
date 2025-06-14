@@ -1,25 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useThemeMode } from './hooks/useThemeMode';
-import { useProjectFile } from './hooks/useProjectFile';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula as darkSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { ghcolors as lightSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import * as displayUtils from './utils/displayUtils';
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
-import { getLanguageFromFilename } from './utils/codeUtils';
-import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 
-SyntaxHighlighter.registerLanguage('python', python);
-SyntaxHighlighter.registerLanguage('json', json);
+displayUtils.SyntaxHighlighter.registerLanguage('python', python);
+displayUtils.SyntaxHighlighter.registerLanguage('json', json);
 
 export default function TextGenerator() {
-  const { selectedFile, setSelectedFile, fileContent } = useProjectFile('TextGenerator');
+  const { selectedFile, setSelectedFile, fileContent } =
+    displayUtils.useProjectFile('TextGenerator');
 
   const isMarkdown = selectedFile.endsWith('.md');
-  const theme = useThemeMode();
-  const isDark = theme === 'dark';
-  const syntaxStyle = isDark ? darkSyntaxStyle : lightSyntaxStyle;
+  const theme = displayUtils.useThemeMode();
+  const syntaxStyles = displayUtils.syntaxStyles;
+  const syntaxStyle = syntaxStyles[theme] || syntaxStyles.light;
 
   return (
     <div className="flex flex-col lg:flex-row h-full w-full bg-primary text-primary">
@@ -163,11 +157,13 @@ export default function TextGenerator() {
           <div className="w-full h-full overflow-auto">
             {isMarkdown ? (
               <div className="prose prose-invert leading-snug max-w-[96%]">
-                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{fileContent}</ReactMarkdown>
+                <displayUtils.ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                  {fileContent}
+                </displayUtils.ReactMarkdown>
               </div>
             ) : (
-              <SyntaxHighlighter
-                language={getLanguageFromFilename(selectedFile)}
+              <displayUtils.SyntaxHighlighter
+                language={displayUtils.getLanguageFromFilename(selectedFile)}
                 style={syntaxStyle}
                 showLineNumbers={true}
                 lineNumberStyle={{
@@ -178,7 +174,7 @@ export default function TextGenerator() {
                 className="syntax-highlighter text-sm"
               >
                 {fileContent}
-              </SyntaxHighlighter>
+              </displayUtils.SyntaxHighlighter>
             )}
           </div>
         </div>
