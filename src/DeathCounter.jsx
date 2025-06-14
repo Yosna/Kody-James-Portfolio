@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useThemeMode } from './hooks/useThemeMode';
+import { useProjectFile } from './hooks/useProjectFile';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula as darkSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { coy as lightSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import autohotkey from 'react-syntax-highlighter/dist/esm/languages/prism/autohotkey';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
@@ -8,32 +11,26 @@ import ReactMarkdown from 'react-markdown';
 SyntaxHighlighter.registerLanguage('autohotkey', autohotkey);
 
 export default function DeathCounter() {
-  const [selectedFile, setSelectedFile] = useState('README.md');
-  const [fileContent, setFileContent] = useState('');
-
-  useEffect(() => {
-    const base = import.meta.env.BASE_URL;
-    fetch(`${base}code/DeathCounter/${selectedFile}`)
-      .then((res) => res.text())
-      .then(setFileContent)
-      .catch((err) => setFileContent(`Error loading file: ${err.message}`));
-  }, [selectedFile]);
+  const { selectedFile, setSelectedFile, fileContent } = useProjectFile('DeathCounter');
 
   const isMarkdown = selectedFile.endsWith('.md');
+  const theme = useThemeMode();
+  const isDark = theme === 'dark';
+  const syntaxStyle = isDark ? darkSyntaxStyle : lightSyntaxStyle;
 
   return (
-    <div className="flex flex-col lg:flex-row h-full w-full bg-gray-900 text-white">
-      <div className="flex-1 p-8 bg-[#181c24] text-white">
-        <h1 className="text-3xl font-bold mb-4 text-blue-200">Elden Ring Death Counter</h1>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Overview:</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+    <div className="flex flex-col lg:flex-row h-full w-full bg-primary text-primary">
+      <div className="flex-1 p-8 bg-primary text-primary">
+        <h1 className="text-3xl font-bold text-heading mb-4">Elden Ring Death Counter</h1>
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">Overview:</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           This project is death counter for Elden Ring, designed to track and display the number of
           times a player has died in the game. Unlike other mods that require you to tab out to a
           separate window, this tool overlays the death count directly, making it easily accessible
           while playing.
         </p>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Why I Built It</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">Why I Built It</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           As a huge fan of FromSoftware games, I wanted a more seamless way to keep track of my
           deaths in Elden Ring. I tried a third-party mod, but it only displayed the count in a
           separate window, which wasn't ideal. My initial goal was just to overlay the death count
@@ -41,8 +38,8 @@ export default function DeathCounter() {
           game's memory using AutoHotkey. This project became a way for me to challenge myself and
           learn new skills, especially around memory reading and system-level programming.
         </p>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">How It Works</h2>
-        <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">How It Works</h2>
+        <ul className="list-disc list-inside mb-4 text-muted leading-relaxed">
           <li>
             Monitors the game's memory to find and read the current death count using AHK v2
             scripts.
@@ -58,15 +55,15 @@ export default function DeathCounter() {
             Includes modular scripts for handling memory access, settings, and utility functions.
           </li>
         </ul>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">What I Learned</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">What I Learned</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           This was the most challenging programming project I had tackled at the time. I learned a
           ton about reading process memory, working with pointers and offsets, and making DLL calls
           from AHK. I also spent a lot of time experimenting with things I didn't end up using, like
           reading binaries with a hex editor. Overall, I gained a much deeper understanding of how
           games store data in memory and how to interact with that data programmatically.
         </p>
-        <p className="mb-6 text-sm text-gray-400 italic">
+        <p className="mb-6 text-sm text-secondary italic">
           Project duration: ~2 weeks (April 12<sup>th</sup> - April 26<sup>th</sup>, 2025)
         </p>
         <a
@@ -78,15 +75,15 @@ export default function DeathCounter() {
           View on GitHub
         </a>
       </div>
-      <div className="flex-1 p-8 bg-[#23293a] border-l border-blue-900 flex justify-center items-center">
+      <div className="flex-1 p-8 bg-secondary border-l border-code flex justify-center items-center">
         <div className="w-full h-full flex flex-col">
           <div className="flex items-center justify-between mb-2 ml-8 mr-8">
-            <label htmlFor="fileSelect" className="font-medium text-xl text-blue-200">
+            <label htmlFor="fileSelect" className="font-medium text-xl text-heading">
               Select a file to view:
             </label>
             <select
               id="fileSelect"
-              className="w-[33%] ml-2 border px-2 py-1 rounded bg-gray-700 text-gray-100 border-blue-900"
+              className="w-[33%] ml-2 border px-2 py-1 rounded bg-accent text-primary border-code"
               value={selectedFile}
               onChange={(e) => setSelectedFile(e.target.value)}
             >

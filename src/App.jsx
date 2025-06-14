@@ -7,9 +7,10 @@ import BigramModel from './BigramModel';
 import SynthesisTracker from './SynthesisTracker';
 import AntSwarm from './AntSwarm';
 import AboutMe from './AboutMe';
+
 function App() {
   return (
-    <div className="flex h-screen bg-gray-900 text-white">
+    <div className="flex h-screen bg-primary text-primary">
       <div className="w-64 h-full">
         <Sidebar />
       </div>

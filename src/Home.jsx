@@ -1,8 +1,8 @@
 export default function Home() {
   return (
-    <div className="h-full flex-1 p-8 bg-[#23293a] text-white flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-200 mb-4">Hi, I'm Kody!</h1>
-      <p className="text-lg text-gray-300 mb-6 max-w-2xl text-center">
+    <div className="h-full flex-1 p-8 bg-secondary text-primary flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold text-heading mb-4">Hi, I'm Kody!</h1>
+      <p className="text-lg text-muted mb-6 max-w-2xl text-center">
         I'm a passionate and self-driven developer with a love for AI, game development, and
         building creative tools. My portfolio showcases projects ranging from memory-reading game
         overlays and incremental games to neural network language models and modular AI text
@@ -10,23 +10,31 @@ export default function Home() {
         ideas into working code.
       </p>
       <div className="flex flex-wrap gap-4 mb-8">
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">Python</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
+          Python
+        </span>
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
           JavaScript
         </span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">React</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">AI/ML</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">Lua</span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
+          React
+        </span>
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
+          AI/ML
+        </span>
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
+          Lua
+        </span>
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
           AutoHotkey v2
         </span>
-        <span className="bg-blue-800 px-3 py-1 rounded text-sm border border-blue-700">
+        <span className="px-3 py-1 rounded text-sm border bg-tag-background border-tag-border text-primary">
           Web Dev
         </span>
       </div>
-      <div className="text-md text-gray-400 mb-8 max-w-2xl text-center">
+      <div className="text-md text-secondary mb-8 max-w-2xl text-center">
         <div>My recent projects include:</div>
-        <ul className="list-disc list-inside mt-2 text-gray-400 text-left">
+        <ul className="list-disc list-inside mt-2 text-left">
           <li>
             <b>Elden Ring Death Counter</b> - A memory-reading overlay for tracking deaths in real
             time.

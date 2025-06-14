@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useThemeMode } from './hooks/useThemeMode';
+import { useProjectFile } from './hooks/useProjectFile';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula as syntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula as darkSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { coy as lightSyntaxStyle } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
 import { getLanguageFromFilename } from './utils/codeUtils';
 import ReactMarkdown from 'react-markdown';
@@ -8,39 +11,33 @@ import ReactMarkdown from 'react-markdown';
 SyntaxHighlighter.registerLanguage('python', python);
 
 export default function BigramModel() {
-  const [selectedFile, setSelectedFile] = useState('README.md');
-  const [fileContent, setFileContent] = useState('');
-
-  useEffect(() => {
-    const base = import.meta.env.BASE_URL;
-    fetch(`${base}code/BigramModel/${selectedFile}`)
-      .then((res) => res.text())
-      .then(setFileContent)
-      .catch((err) => setFileContent(`Error loading file: ${err.message}`));
-  }, [selectedFile]);
+  const { selectedFile, setSelectedFile, fileContent } = useProjectFile('BigramModel');
 
   const isMarkdown = selectedFile.endsWith('.md');
+  const theme = useThemeMode();
+  const isDark = theme === 'dark';
+  const syntaxStyle = isDark ? darkSyntaxStyle : lightSyntaxStyle;
 
   return (
-    <div className="flex flex-col lg:flex-row h-full w-full bg-gray-900 text-white">
-      <div className="flex-1 p-8 bg-[#181c24] text-white">
-        <h1 className="text-3xl font-bold mb-4 text-blue-200">Bigram Language Model</h1>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Overview:</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+    <div className="flex flex-col lg:flex-row h-full w-full bg-primary text-primary">
+      <div className="flex-1 p-8 bg-primary text-primary">
+        <h1 className="text-3xl font-bold text-heading mb-4">Bigram Language Model</h1>
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">Overview:</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           This project is a simple character-level neural network built with PyTorch. It predicts
           the next character in a sequence based on the current character, learning
           character-to-character relationships from any input text. The project demonstrates
           foundational NLP concepts like embeddings, tokenization, and text generation, all in a
           minimal, easy-to-understand codebase.
         </p>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Why I Built It</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">Why I Built It</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           I have been fascinated by AI ever since early 2023, so I wanted to try and learn more
           about it to see how far I could get. Building a bigram model seemed like a great way to
           get hands-on experience with neural networks and natural language processing.
         </p>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">How It Works</h2>
-        <ul className="list-disc list-inside mb-4 text-gray-200 leading-relaxed">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">How It Works</h2>
+        <ul className="list-disc list-inside mb-4 text-muted leading-relaxed">
           <li>Reads a text file and builds a vocabulary of unique characters.</li>
           <li>Encodes the text as sequences of character indices.</li>
           <li>
@@ -60,15 +57,15 @@ export default function BigramModel() {
             dictionary.
           </li>
         </ul>
-        <h2 className="text-xl font-semibold mt-6 mb-2 text-blue-300">What I Learned</h2>
-        <p className="mb-4 leading-relaxed text-gray-200">
+        <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">What I Learned</h2>
+        <p className="mb-4 leading-relaxed text-muted">
           Through this project, I learned the fundamentals of building and training neural networks
           with PyTorch, including data encoding, embedding layers, and loss computation. I also
           gained experience with text generation, model evaluation, and managing training workflows
           in Python. This project gave me a much deeper understanding of how language models work at
           a low level.
         </p>
-        <p className="mb-6 text-sm text-gray-400 italic">
+        <p className="mb-6 text-sm text-secondary italic">
           Project duration: ~9 days (May 2<sup>nd</sup> - May 11<sup>th</sup>, 2025)
         </p>
         <a
@@ -80,15 +77,15 @@ export default function BigramModel() {
           View on GitHub
         </a>
       </div>
-      <div className="flex-1 p-8 bg-[#23293a] border-l border-blue-900 flex justify-center items-center">
+      <div className="flex-1 p-8 bg-secondary border-l border-code flex justify-center items-center">
         <div className="w-full h-full flex flex-col">
           <div className="flex items-center justify-between mb-2 ml-8 mr-8">
-            <label htmlFor="fileSelect" className="font-medium text-xl text-blue-200">
+            <label htmlFor="fileSelect" className="font-medium text-xl text-heading">
               Select a file to view:
             </label>
             <select
               id="fileSelect"
-              className="w-[33%] ml-2 border px-2 py-1 rounded bg-gray-700 text-gray-100 border-blue-900"
+              className="w-[33%] ml-2 border px-2 py-1 rounded bg-accent text-primary border-code"
               value={selectedFile}
               onChange={(e) => setSelectedFile(e.target.value)}
             >
