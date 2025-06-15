@@ -57,8 +57,8 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (129 unit 666 stmts /
-            0 miss).
+            Features a complete test suite with <strong>100% coverage</strong> (136 unit tests, 757
+            stmts / 0 miss).
           </li>
           <li>
             Generates text by sampling from trained models using multinomial sampling and random
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~1 month (May 12<sup>th</sup> - June 12<sup>th</sup>, 2025)
+          Project duration: ~1 month (May 12<sup>th</sup> - June 14<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -121,6 +121,9 @@ export default function TextGenerator() {
                   &#x2514;&#x2500; distilgpt2_model.py
                 </option>
               </optgroup>
+              <optgroup label="&#x2514;&#x2500; /profiling">
+                <option value="profiling/profiler.py">&#x2514;&#x2500; profiler.py</option>
+              </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
                 <option value="tests/test_cli.py">&#x251C;&#x2500; test_cli.py</option>
@@ -131,6 +134,7 @@ export default function TextGenerator() {
                 <option value="tests/test_visualizer.py">
                   &#x251C;&#x2500; test_visualizer.py
                 </option>
+                <option value="tests/test_profiling.py">&#x251C;&#x2500; test_profiling.py</option>
                 <option value="tests/test_run_dashboard.py">
                   &#x251C;&#x2500; test_run_dashboard.py
                 </option>
@@ -146,7 +150,7 @@ export default function TextGenerator() {
                 </option>
                 <option value="tests/test_gru_model.py">&#x251C;&#x2500; test_gru_model.py</option>
                 <option value="tests/test_transformer_model.py">
-                  &#x2514;&#x2500; test_transformer_model.py
+                  &#x251C;&#x2500; test_transformer_model.py
                 </option>
                 <option value="tests/test_distilgpt2_model.py">
                   &#x2514;&#x2500; test_distilgpt2_model.py
