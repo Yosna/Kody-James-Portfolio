@@ -104,7 +104,6 @@ export default function TextGenerator() {
               <option value="library.py">&#x251C;&#x2500; library.py</option>
               <option value="training.py">&#x251C;&#x2500; training.py</option>
               <option value="tuning.py">&#x251C;&#x2500; tuning.py</option>
-              <option value="utils.py">&#x251C;&#x2500; utils.py</option>
               <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
               <option value="run_dashboard.py">&#x251C;&#x2500; run_dashboard.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
