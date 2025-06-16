@@ -22,12 +22,14 @@ Example:
     }
 """
 
-from models.registry import ModelRegistry as Model
-import torch
 import optuna
+import torch
 from optuna import pruners
+
+from models.registry import ModelRegistry as Model
 from training import train
-from utils import save_config, load_config, get_config, get_model
+from utils.io_utils import get_config, load_config, save_config
+from utils.model_utils import get_model
 
 
 def optimize_and_train(model: Model.BaseLM, data: torch.Tensor):
@@ -111,7 +113,7 @@ def make_objective(model: Model.BaseLM, data: torch.Tensor):
     tuning_options = config.get("tuning_options", {})
     tune = config.get("tuning_ranges", {})
     model = get_model(
-        Model, model.name, models, model.cfg_path, model.vocab_size, model.token_level
+        model.name, models, model.cfg_path, model.vocab_size, model.token_level
     )
     hparams = model_config.get("hparams", {})
     step_divisor = tuning_options.get("step_divisor", 10)

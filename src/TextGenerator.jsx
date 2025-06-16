@@ -57,7 +57,7 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (136 unit tests, 757
+            Features a complete test suite with <strong>100% coverage</strong> (136 unit tests, 772
             stmts / 0 miss).
           </li>
           <li>
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~1 month (May 12<sup>th</sup> - June 14<sup>th</sup>, 2025)
+          Project duration: ~1 month (May 12<sup>th</sup> - June 15<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -108,6 +108,11 @@ export default function TextGenerator() {
               <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
               <option value="run_dashboard.py">&#x251C;&#x2500; run_dashboard.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
+              <optgroup label="&#x2514;&#x2500; /utils">
+                <option value="utils/data_utils.py">&#x251C;&#x2500; data_utils.py</option>
+                <option value="utils/io_utils.py">&#x251C;&#x2500; io_utils.py</option>
+                <option value="utils/model_utils.py">&#x2514;&#x2500; model_utils.py</option>
+              </optgroup>
               <optgroup label="&#x2514;&#x2500; /models">
                 <option value="models/registry.py">&#x251C;&#x2500; registry.py</option>
                 <option value="models/base_model.py">&#x251C;&#x2500; base_model.py</option>
@@ -130,13 +135,19 @@ export default function TextGenerator() {
                 <option value="tests/test_library.py">&#x251C;&#x2500; test_library.py</option>
                 <option value="tests/test_training.py">&#x251C;&#x2500; test_training.py</option>
                 <option value="tests/test_tuning.py">&#x251C;&#x2500; test_tuning.py</option>
-                <option value="tests/test_utils.py">&#x251C;&#x2500; test_utils.py</option>
                 <option value="tests/test_visualizer.py">
                   &#x251C;&#x2500; test_visualizer.py
                 </option>
                 <option value="tests/test_profiling.py">&#x251C;&#x2500; test_profiling.py</option>
                 <option value="tests/test_run_dashboard.py">
                   &#x251C;&#x2500; test_run_dashboard.py
+                </option>
+                <option value="tests/test_data_utils.py">
+                  &#x251C;&#x2500; test_data_utils.py
+                </option>
+                <option value="tests/test_io_utils.py">&#x251C;&#x2500; test_io_utils.py</option>
+                <option value="tests/test_model_utils.py">
+                  &#x2514;&#x2500; test_model_utils.py
                 </option>
                 <option value="tests/test_registry.py">&#x251C;&#x2500; test_registry.py</option>
                 <option value="tests/test_base_model.py">

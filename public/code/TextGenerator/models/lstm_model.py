@@ -1,10 +1,12 @@
 """LSTM-based language model implementation for sequence modeling."""
 
+from typing import Any
+
 import torch
 import torch.nn as nn
+
 from models.base_model import BaseLanguageModel
-from utils import decode_data
-from typing import Any
+from utils.data_utils import decode_data
 
 
 class LSTMLanguageModel(BaseLanguageModel):
@@ -160,7 +162,7 @@ class LSTMLanguageModel(BaseLanguageModel):
 
         return decode_data(generated, itos, self.token_level)
 
-    def train_step(self, *args, **kwargs):
+    def train_step(self, *args, **kwargs) -> float:
         """Reset hidden state at the start of each training step.
 
         Please see the base class for more information.
