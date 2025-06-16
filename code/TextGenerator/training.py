@@ -5,10 +5,15 @@ Includes:
 - validate_data: Validation and early stopping logic.
 """
 
-from models.registry import ModelRegistry as Model
+from typing import cast
+
 import torch
 from optuna import Trial, TrialPruned
-from utils import get_batch, save_checkpoint, get_metadata, split_data, get_config
+
+from models.registry import ModelRegistry as Model
+from utils.data_utils import split_data
+from utils.io_utils import get_config, get_metadata
+from utils.model_utils import get_batch
 from visualizer import plot_losses
 
 
@@ -48,7 +53,9 @@ def train(
     wait = 0
 
     for step in range(model.steps // step_divisor):
-        xb, yb = get_batch(model, train_data)
+        block_size = cast(int, model.block_size)
+        batch_size = cast(int, model.batch_size)
+        xb, yb = get_batch(block_size, batch_size, train_data, model.device)
         loss = model.train_step(xb, yb, optimizer)
         losses.append(loss)
 
@@ -98,7 +105,9 @@ def validate_data(
     """
     overfit = False
     if step % model.interval == 0:
-        xb, yb = get_batch(model, data)
+        block_size = cast(int, model.block_size)
+        batch_size = cast(int, model.batch_size)
+        xb, yb = get_batch(block_size, batch_size, data, model.device)
 
         with torch.no_grad():
             logits = model(xb)
@@ -114,7 +123,7 @@ def validate_data(
 
         if loss_improved and full_training_run and save_model:
             # Save model if validation loss improves during a full training run
-            save_checkpoint(model, step, val_loss)
+            model.save_checkpoint(step, val_loss)
 
         # Check if training should stop due to overfitting
         overfit, best_loss, wait = model.check_patience(best_loss, val_loss, wait)

@@ -4,21 +4,19 @@ Handles argument parsing, dataset loading, model initialization, and dispatches
 training or text generation based on configuration and model type.
 """
 
-from models.registry import ModelRegistry as Model
-import torch
-import random
-import os
 import argparse
-from utils import (
-    get_config,
-    build_vocab,
-    create_mappings,
-    encode_data,
-    get_model,
-)
+import os
+import random
+
+import torch
+
 from cli import parse_args, parse_config
-from tuning import optimize_and_train
 from library import get_dataset
+from models.registry import ModelRegistry as Model
+from tuning import optimize_and_train
+from utils.data_utils import encode_data
+from utils.io_utils import get_config
+from utils.model_utils import build_vocab, create_mappings, get_model
 
 
 def main(args: argparse.Namespace, cfg_path: str = "config.json") -> None:
@@ -38,7 +36,7 @@ def main(args: argparse.Namespace, cfg_path: str = "config.json") -> None:
     stoi, itos = create_mappings(vocab)
     data = encode_data(tokens, stoi)
     config = get_config(cfg_path, "models")
-    model = get_model(Model, model_name, config, cfg_path, vocab_size, token_level)
+    model = get_model(model_name, config, cfg_path, vocab_size, token_level)
 
     validate_model(model, text, data, stoi, itos)
 
