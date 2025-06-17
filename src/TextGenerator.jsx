@@ -57,7 +57,7 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (136 unit tests, 772
+            Features a complete test suite with <strong>100% coverage</strong> (136 unit tests, 788
             stmts / 0 miss).
           </li>
           <li>
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~1 month (May 12<sup>th</sup> - June 15<sup>th</sup>, 2025)
+          Project duration: ~1 month (May 12<sup>th</sup> - June 16<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -105,7 +105,6 @@ export default function TextGenerator() {
               <option value="training.py">&#x251C;&#x2500; training.py</option>
               <option value="tuning.py">&#x251C;&#x2500; tuning.py</option>
               <option value="visualizer.py">&#x251C;&#x2500; visualizer.py</option>
-              <option value="run_dashboard.py">&#x251C;&#x2500; run_dashboard.py</option>
               <option value="config.json">&#x2514;&#x2500; config.json</option>
               <optgroup label="&#x2514;&#x2500; /utils">
                 <option value="utils/data_utils.py">&#x251C;&#x2500; data_utils.py</option>
@@ -119,14 +118,16 @@ export default function TextGenerator() {
                 <option value="models/lstm_model.py">&#x251C;&#x2500; lstm_model.py</option>
                 <option value="models/gru_model.py">&#x251C;&#x2500; gru_model.py</option>
                 <option value="models/transformer_model.py">
-                  &#x2514;&#x2500; transformer_model.py
+                  &#x251C;&#x2500; transformer_model.py
                 </option>
                 <option value="models/distilgpt2_model.py">
                   &#x2514;&#x2500; distilgpt2_model.py
                 </option>
               </optgroup>
-              <optgroup label="&#x2514;&#x2500; /profiling">
-                <option value="profiling/profiler.py">&#x2514;&#x2500; profiler.py</option>
+              <optgroup label="&#x2514;&#x2500; /run">
+                <option value="run/__main__.py">&#x251C;&#x2500; __main__.py</option>
+                <option value="run/dashboard.py">&#x251C;&#x2500; dashboard.py</option>
+                <option value="run/profiler.py">&#x2514;&#x2500; profiler.py</option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>
@@ -136,10 +137,6 @@ export default function TextGenerator() {
                 <option value="tests/test_tuning.py">&#x251C;&#x2500; test_tuning.py</option>
                 <option value="tests/test_visualizer.py">
                   &#x251C;&#x2500; test_visualizer.py
-                </option>
-                <option value="tests/test_profiling.py">&#x251C;&#x2500; test_profiling.py</option>
-                <option value="tests/test_run_dashboard.py">
-                  &#x251C;&#x2500; test_run_dashboard.py
                 </option>
                 <option value="tests/test_data_utils.py">
                   &#x251C;&#x2500; test_data_utils.py
@@ -163,8 +160,13 @@ export default function TextGenerator() {
                   &#x251C;&#x2500; test_transformer_model.py
                 </option>
                 <option value="tests/test_distilgpt2_model.py">
-                  &#x2514;&#x2500; test_distilgpt2_model.py
+                  &#x251C;&#x2500; test_distilgpt2_model.py
                 </option>
+                <option value="tests/test_run__main__.py">
+                  &#x251C;&#x2500; test_run__main__.py
+                </option>
+                <option value="tests/test_dashboard.py">&#x251C;&#x2500; test_dashboard.py</option>
+                <option value="tests/test_profiler.py">&#x2514;&#x2500; test_profiler.py</option>
               </optgroup>
             </select>
           </div>
