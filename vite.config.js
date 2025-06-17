@@ -5,4 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: '/Kody-James-Portfolio/',
   plugins: [react()],
+  server: {
+    fs: {
+      allow: ['..'],
+    },
+  },
+  assetsInclude: ['**/_*.py'], // Include files starting with underscore
 });
