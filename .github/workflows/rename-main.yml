@@ -1,4 +1,4 @@
-name: Rename __main__.py for Deployment
+name: Build and Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  rename-main:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,19 +20,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Find and copy __main__.py files
+      - name: Rename __main__.py files
         run: |
-          find . -type f -name '__main__.py' | while read file; do
-            dir=$(dirname "$file")
-            cp "$file" "$dir/main__.py"
+          find public -name "__main__.py" | while read file; do
+            cp "$file" "${file%__main__.py}main__.py"
           done
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+      - name: Build project
+        run: npm run build
 
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
