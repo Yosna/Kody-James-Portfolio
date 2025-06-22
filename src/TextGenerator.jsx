@@ -57,7 +57,7 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (185 unit tests, 993
+            Features a complete test suite with <strong>100% coverage</strong> (189 unit tests, 964
             stmts / 0 miss).
           </li>
           <li>
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~5 weeks (May 12<sup>th</sup> - June 20<sup>th</sup>, 2025)
+          Project duration: ~5 weeks (May 12<sup>th</sup> - June 21<sup>st</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -130,7 +130,7 @@ export default function TextGenerator() {
                 <option value="run/dashboard.py">&#x251C;&#x2500; dashboard.py</option>
                 <option value="run/profiler.py">&#x2514;&#x2500; profiler.py</option>
               </optgroup>
-              <optgroup label="&#x2514;&#x2500; /helpers">
+              <optgroup label="&#x2514;&#x2500; /run/helpers">
                 <option value="run/helpers/widgets.py">&#x251C;&#x2500; widgets.py</option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
