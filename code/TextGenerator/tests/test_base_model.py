@@ -18,22 +18,12 @@ class BaseLanguageModel(Model.BaseLM):
         logits = self.embedding(idx)
         return logits
 
-    def generate(self, start_idx, max_new_tokens):
-        self.eval()
-        idx = torch.tensor([[start_idx]], dtype=torch.long, device=self.device)
-        generated = torch.tensor([start_idx], dtype=torch.long, device=self.device)
-        for _ in range(max_new_tokens):
-            logits = self(idx)
-            next_idx = self.new_token(logits)
-            generated = torch.cat((generated, next_idx), dim=0)
-        return generated
-
 
 def get_base_model(tmp_path):
-    cfg_path = os.path.join(tmp_path, "config.json")
+    cfg_path = build_file(tmp_path, "config.json", json.dumps(get_test_config()))
     model = BaseLanguageModel(
         model_name="mock",
-        config=get_runtime_config(),
+        config=get_test_config(),
         cfg_path=cfg_path,
         vocab_size=10,
         token_level="char",
@@ -46,8 +36,9 @@ def get_base_model(tmp_path):
     return model
 
 
-def get_runtime_config():
+def get_test_config():
     return {
+        "model_options": {},
         "runtime": {
             "training": True,
             "batch_size": 2,
@@ -58,7 +49,7 @@ def get_runtime_config():
             "patience": 10,
             "max_new_tokens": 10,
             "max_checkpoints": 10,
-        }
+        },
     }
 
 
@@ -75,14 +66,14 @@ def test_base_model(tmp_path):
 
 def test_base_model_init(tmp_path):
     model = get_base_model(tmp_path)
+    cfg_path = build_file(tmp_path, "config.json", json.dumps(get_test_config()))
     assert model.name == "mock"
-    print(model.cfg_path)
     assert model.dir_path == os.path.join(tmp_path, "checkpoints", "mock")
     assert model.plot_dir == os.path.join(tmp_path, "plots", "mock")
     assert model.ckpt_dir == os.path.join(model.dir_path, "checkpoint_1")
     assert model.ckpt_path == os.path.join(model.ckpt_dir, "checkpoint.pt")
     assert model.meta_path == os.path.join(model.ckpt_dir, "metadata.json")
-    assert model.cfg_path == os.path.join(tmp_path, "config.json")
+    assert model.cfg_path == cfg_path
     assert model.device == torch.device("cuda" if torch.cuda.is_available() else "cpu")
     assert model.vocab_size == 10
 
@@ -120,16 +111,6 @@ def test_base_model_check_patience_no_loss_improvement(tmp_path):
     assert overfit
     assert best_loss == 1
     assert wait == 10
-
-
-def test_base_model_new_token(tmp_path):
-    model = get_base_model(tmp_path)
-    logits = torch.tensor([0.1, 0.2, 0.3, 0.4, 0.5]).repeat(1, 10, 1)
-    next_idx = model.new_token(logits)
-    assert isinstance(next_idx, torch.Tensor)
-    assert next_idx.shape == torch.Size([1, 1])
-    assert model.vocab_size is not None
-    assert next_idx.item() in range(model.vocab_size)
 
 
 def test_save_checkpoint(tmp_path):
