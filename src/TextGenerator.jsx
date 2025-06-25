@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~5 weeks (May 12<sup>th</sup> - June 21<sup>st</sup>, 2025)
+          Project duration: ~6 weeks (May 12<sup>th</sup> - June 24<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -124,6 +124,11 @@ export default function TextGenerator() {
                   &#x2514;&#x2500; distilgpt2_model.py
                 </option>
               </optgroup>
+              <optgroup label="&#x2514;&#x2500; /models/components">
+                <option value="models/components/generators.py">
+                  &#x251C;&#x2500; generators.py
+                </option>
+              </optgroup>
               <optgroup label="&#x2514;&#x2500; /run">
                 <option value="run/__main__.py">&#x251C;&#x2500; __main__.py</option>
                 <option value="run/config.py">&#x251C;&#x2500; config.py</option>
@@ -165,6 +170,9 @@ export default function TextGenerator() {
                 </option>
                 <option value="tests/test_distilgpt2_model.py">
                   &#x251C;&#x2500; test_distilgpt2_model.py
+                </option>
+                <option value="tests/test_generators.py">
+                  &#x251C;&#x2500; test_generators.py
                 </option>
                 <option value="tests/test_run__main__.py">
                   &#x251C;&#x2500; test_run__main__.py
