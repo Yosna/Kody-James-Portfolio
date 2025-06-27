@@ -1,12 +1,11 @@
 """Bigram language model implementation for character-level prediction."""
 
-from typing import Any
+from typing import Any, cast
 
 import torch
 import torch.nn as nn
 
 from models.base_model import BaseLanguageModel
-from models.components.generators import Generators, Samplers
 
 
 class BigramLanguageModel(BaseLanguageModel):
@@ -36,17 +35,12 @@ class BigramLanguageModel(BaseLanguageModel):
     block_size: int
     lr: float
 
-    def __init__(
-        self, config: dict[str, Any], cfg_path: str, vocab_size: int, token_level: str
-    ) -> None:
+    def __init__(self, config: dict[str, Any], cfg_path: str) -> None:
         """Initialize the bigram model and its parameters.
 
         Args:
             config (dict): Configuration dictionary for the model.
             cfg_path (str): Path to the config file.
-            vocab_size (int): Number of unique tokens in the vocabulary.
-            token_level (str): Token level to use for vocabulary building.
-                Options: "char" (default), or "word"
 
         Raises:
             ValueError: If vocab_size is not set or is too large for the model.
@@ -54,23 +48,16 @@ class BigramLanguageModel(BaseLanguageModel):
         Notes:
             config["hparams"] keys are set as attributes on the model instance.
         """
-        super().__init__(
-            model_name="bigram",
-            config=config,
-            cfg_path=cfg_path,
-            vocab_size=vocab_size,
-            token_level=token_level,
-        )
+        name = "bigram"
+        super().__init__(model_name=name, config=config, cfg_path=cfg_path)
 
-        # Set all hparams config keys as attributes
-        for key, value in config.get("hparams", {}).items():
-            setattr(self, key, value)
+        vocab_size = cast(int, self.vocab_size)
 
         if not self.vocab_size:
             raise ValueError("Vocab size is not set for Bigram model")
-        elif self.vocab_size > 10000:
+        elif vocab_size > 10000:
             raise ValueError(
-                f"Attempted to set vocab_size to {self.vocab_size}.\n"
+                f"Attempted to set vocab_size to {vocab_size}.\n"
                 "Bigram model is not suitable for large vocab sizes.\n"
                 "If you're using word-level tokenization, consider using a\n"
                 "different model or switching to character-level tokenization."
@@ -101,18 +88,3 @@ class BigramLanguageModel(BaseLanguageModel):
         # (B, T, vocab_size): map indices to logits for next character prediction
         logits = self.embedding(idx)
         return logits
-
-    @torch.no_grad()
-    def generate(self, stoi: dict[str, int], itos: dict[int, str]) -> str:
-        """Generate new text from a starting index.
-
-        Args:
-            stoi (dict[str, int]): Mapping from characters to token indices.
-            itos (dict[int, str]): Mapping from token indices to tokens.
-
-        Returns:
-            str: The generated text.
-        """
-        generator = Generators.Text.Random(stoi, itos, Samplers.Multinomial())
-        output = generator.output(self)
-        return output

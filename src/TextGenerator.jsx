@@ -57,7 +57,7 @@ export default function TextGenerator() {
             control.
           </li>
           <li>
-            Features a complete test suite with <strong>100% coverage</strong> (189 unit tests, 964
+            Features a complete test suite with <strong>100% coverage</strong> (205 unit tests, 1050
             stmts / 0 miss).
           </li>
           <li>
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~6 weeks (May 12<sup>th</sup> - June 24<sup>th</sup>, 2025)
+          Project duration: ~7 weeks (May 12<sup>th</sup> - June 27<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"

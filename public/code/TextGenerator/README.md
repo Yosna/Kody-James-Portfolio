@@ -36,7 +36,7 @@ The codebase is modular, config-driven, and supports training, checkpointing, ea
 
 ## Features
 
-- Character-level or word-level tokenization across multiple input files (configurable via `token_level`)
+- Character-level or word-level tokenization across multiple input files (configurable via `token_level` in `model_options`)
 - Dynamic vocabulary and index mapping
 - Modular model registry for Bigram, LSTM, GRU, Transformer, and DistilGPT2 (inference-only)
 - Configurable training and hyperparameter tuning via `config.json`
@@ -44,8 +44,9 @@ The codebase is modular, config-driven, and supports training, checkpointing, ea
 - Optuna Dashboard for visualizing hyperparameter optimization studies
 - Adam optimizer with early stopping
 - Automatic checkpoint rotation and resumption with metadata tracking
-- Multinomial sampling for randomized generation
-- Temperature scaling for controllable randomness in generation (configurable via `temperature`)
+- Text generation strategies: Random generation and prompt-based generation (configurable via `generator` in `generator_options`)
+- Multinomial and argmax sampling for text generation (configurable via `sampler` in `generator_options`)
+- Temperature scaling for controllable randomness in generation (configurable via `temperature` in `generator_options`)
 - Comprehensive CLI interface with model selection, runtime, hyperparameter, model options, tuning, and visualization configuration
 - Full unit test coverage (100%) for all modules
 - Tests include generation and training for all models, tuning, visualization, CLI behavior, argument parsing helpers, and profiling
@@ -55,7 +56,7 @@ The codebase is modular, config-driven, and supports training, checkpointing, ea
 - Support for local files, Hugging Face datasets, and built-in library datasets
 - Built-in profiling for performance analysis
 - Interactive GUI for editing `config.json`
-- **Statistics**: 185 unit tests, 100% coverage, 993 stmts / 0 miss
+- **Statistics**: 205 unit tests, 100% coverage, 1050 stmts / 0 miss
 
 ## Model Architectures
 
@@ -108,7 +109,7 @@ You can use any dataset from the Hugging Face Hub by specifying the dataset name
 
 ## Configuration
 
-All behavior is driven by a single `config.json` file. You can edit this file manually or use the user-friendly [Configuration Editor](#configuration-editor).
+All behavior is driven by a single `config.json` file. You can edit this file manually or with the user-friendly [Configuration Editor](#configuration-editor).
 
 <details>
 <summary><b>Example</b> <code>config.json</code> (<i>click to expand</i>)</summary>
@@ -134,10 +135,18 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
     }
   },
 
+  "generator_options": {
+    "generator": "random",
+    "context_length": 128,
+    "sampler": "multinomial",
+    "temperature": 1.0
+  },
+
   "model_options": {
     "save_model": true,
-    "token_level": "word",
-    "temperature": 1.0
+    "token_level": "char",
+    "patience": 10,
+    "max_checkpoints": 10
   },
 
   "models": {
@@ -146,9 +155,7 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
         "training": true,
         "steps": 10000,
         "interval": 100,
-        "patience": 10,
-        "max_new_tokens": 128,
-        "max_checkpoints": 10
+        "max_new_tokens": 128
       },
       "hparams": {
         "batch_size": 16,
@@ -161,9 +168,7 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
         "training": true,
         "steps": 50000,
         "interval": 500,
-        "patience": 10,
-        "max_new_tokens": 256,
-        "max_checkpoints": 10
+        "max_new_tokens": 256
       },
       "hparams": {
         "batch_size": 32,
@@ -179,9 +184,7 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
         "training": true,
         "steps": 50000,
         "interval": 500,
-        "patience": 10,
-        "max_new_tokens": 256,
-        "max_checkpoints": 10
+        "max_new_tokens": 256
       },
       "hparams": {
         "batch_size": 32,
@@ -197,9 +200,7 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
         "training": true,
         "steps": 100000,
         "interval": 1000,
-        "patience": 10,
-        "max_new_tokens": 256,
-        "max_checkpoints": 10
+        "max_new_tokens": 256
       },
       "hparams": {
         "batch_size": 32,
@@ -317,7 +318,8 @@ All behavior is driven by a single `config.json` file. You can edit this file ma
 You can configure:
 
 - **Datasets** (`datasets`): Source and location to pull from
-- **Model Options** (`model_options`): Model saving, tokenization level, and temperature scaling for generation
+- **Generator Options** (`generator_options`): Text generation and sampling strategies, along with relevant options.
+- **Model Options** (`model_options`): Model saving, tokenization level, early stopping patience, and checkpoint management
 - **Runtime** (`runtime`): Training and generation settings for each model
 - **Hyperparameters** (`hparams`): Model-specific architecture and optimization parameters
 - **Pruners** (`pruners`): Configuration for Optuna pruners
@@ -380,11 +382,12 @@ A built-in profiling tool is included to help you analyze performance bottleneck
 
 The project provides a flexible CLI for controlling model options, runtime and hyperparameters, tuning options, and visualization:
 
-- **Model Options** (`--save-model`, `--token-level`, `--temperature`)
-- **Runtime** (`--training`, `--steps`, `--interval`, etc.)
-- **Hyperparameters** (`--batch-size`, `--block-size`, `--lr`, etc.)
-- **Tuning Options** (`--auto-tuning`, `--save-tuning`, `--save-study`, etc.)
-- **Visualization** (`--save-plot`, `--show-plot`, `--smooth-loss`, etc.)
+- **Generator Options** (`--generator`, `--context-length`, `--sampler`, ...)
+- **Model Options** (`--save-model`, `--token-level`, `patience`...)
+- **Runtime** (`--training`, `--steps`, `--interval`, ...)
+- **Hyperparameters** (`--batch-size`, `--block-size`, `--lr`, ...)
+- **Tuning Options** (`--auto-tuning`, `--save-tuning`, `--save-study`, ...)
+- **Visualization** (`--save-plot`, `--show-plot`, `--smooth-loss`, ...)
 
 For a full list of arguments, run:
 
@@ -394,27 +397,28 @@ python main.py --help
 
 <details><summary><b>Available CLI Arguments:</b> (<i>click to expand</i>)</summary><br>
 
-\*_arg for all models_, \*\*_arg for all models excluding distilgpt2_
-
 - `--model`: Select model type (**default**: transformer, **options**: [bigram | lstm | gru | transformer | distilgpt2])
-- `--training`: Toggle training mode \*\*
-- `--steps`: Number of training steps \*\*
-- `--interval`: Validation interval during training \*\*
-- `--patience`: Early stopping patience \*\*
-- `--max-new-tokens`: Maximum tokens to generate \*
-- `--max-checkpoints`: Maximum checkpoints to keep \*\*
-- `--batch-size`: Override batch size for training \*\*
-- `--block-size`: Override context window size \*
-- `--lr`: Override learning rate \*\*
-- `--embedding-dim`: Override embedding dimension size (LSTM / GRU)
-- `--hidden-size`: Override hidden layer size (LSTM / GRU)
-- `--num-layers`: Override number of model layers (LSTM / GRU / transformer)
-- `--max-seq-len`: Override maximum sequence length (transformer)
-- `--num-heads`: Override number of attention heads (transformer)
-- `--ff-dim`: Override feedforward dimension (transformer)
+- `--generator`: Override text generation strategy (generator_options)
+- `--context-length`: Override context length for prompt generation (generator_options)
+- `--sampler`: Override sampling strategy for generation (generator_options)
+- `--temperature`: Override temperature for generation (generator_options)
 - `--save-model`: Override model saving (model_options)
 - `--token-level`: Override tokenization level (model_options)
-- `--temperature`: Override temperature for generation (model_options)
+- `--patience`: Early stopping patience (model_options)
+- `--max-checkpoints`: Maximum checkpoints to keep (model_options)
+- `--training`: Toggle training mode (runtime)
+- `--steps`: Number of training steps (runtime)
+- `--interval`: Validation interval during training (runtime)
+- `--max-new-tokens`: Maximum tokens to generate (runtime)
+- `--batch-size`: Override batch size for training (hparams)
+- `--block-size`: Override context window size (hparams)
+- `--lr`: Override learning rate (hparams)
+- `--embedding-dim`: Override embedding dimension size (hparams)
+- `--hidden-size`: Override hidden layer size (hparams)
+- `--num-layers`: Override number of model layers (hparams)
+- `--max-seq-len`: Override maximum sequence length (hparams)
+- `--num-heads`: Override number of attention heads (hparams)
+- `--ff-dim`: Override feedforward dimension (hparams)
 - `--auto-tuning`: Enable/disable hyperparameter tuning (tuning_options)
 - `--save-tuning`: Enable/disable saving tuned hyperparameters (tuning_options)
 - `--save-study`: Enable/disable saving Optuna study (tuning_options)
@@ -456,9 +460,14 @@ Then run the same command to generate text:
 python main.py --model transformer
 ```
 
-The output will begin with a randomly selected seed character or word (depending on `token_level`) and continue for the configured number of tokens.
+The project supports two text generation strategies:
+
+1. **Random Generation** (`"generator": "random"`): Starts with a randomly selected seed character/word and generates text from there
+2. **Prompt-Based Generation** (`"generator": "prompt"`): Uses a user-provided prompt and generates text continuing from that prompt
 
 You can control the randomness of generation using the `temperature` argument in `config.json`. Lower values make output more deterministic; higher values make it more random.
+
+For prompt-based generation, you can also configure the `context_length` to control how much of the prompt history is used for generating the next token.
 
 ## Loss Visualization
 
@@ -542,7 +551,7 @@ You can modify the `CMD` in the Dockerfile to run other scripts or pass argument
 - The project includes comprehensive unit tests for all major modules: training, datasets, utility functions, loss visualization, tuning, model/CLI behavior, and profiling.
 - Tests are written using `pytest` with `coverage` for reporting. Both are required and included in `requirements.txt`
 - All unit tests are located in the `tests/` directory.
-- **Statistics**: 196 unit tests, 100% coverage, 998 stmts / 0 miss
+- **Statistics**: 205 unit tests, 100% coverage, 1050 stmts / 0 miss
 - To run all tests:
   ```bash
   pytest
