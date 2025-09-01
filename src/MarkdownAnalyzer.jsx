@@ -62,7 +62,7 @@ export default function MarkdownAnalyzer() {
           down into incremental steps that could realistically be built to completion.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~8 weeks (June 28<sup>th</sup> - August 26<sup>th</sup>, 2025)
+          Initial project duration:: ~8 weeks (June 28<sup>th</sup> - August 26<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Markdown-Analyzer"

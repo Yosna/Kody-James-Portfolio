@@ -53,7 +53,7 @@ export default function AntSwarm() {
           user input and feedback in a browser environment.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~2 months (April 11<sup>th</sup> - June 4<sup>th</sup>, 2023)
+          Initial project duration:: ~2 months (April 11<sup>th</sup> - June 4<sup>th</sup>, 2023)
         </p>
         <a
           href="https://github.com/Yosna/Ant-Swarm/tree/main"

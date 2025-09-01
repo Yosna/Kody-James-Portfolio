@@ -29,11 +29,11 @@ export default function TextGenerator() {
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">Why I Built It</h2>
         <p className="mb-4 leading-relaxed text-muted">
-          After finishing my bigram model, I wanted to take things further by refactoring and
-          expanding the project into a more modular, multi-model framework. I decided to add this as
-          a fifth project to my portfolio to showcase my decision-making, the process of turning a
-          single script into a scalable codebase, and my ability to implement new features, refactor
-          code, and add unit testing.
+          After learning the basics by building a bigram model, I wanted to keep going by
+          refactoring and expanding the project into a more modular, multi-model framework. I
+          decided to add this as a fifth project to my portfolio to showcase my decision-making, the
+          process of turning a single script into a scalable codebase, and my ability to implement
+          new features, refactor code, and add unit testing.
         </p>
         <h2 className="text-xl font-semibold mt-6 mb-2 text-accent">How It Works</h2>
         <ul className="list-disc list-inside mb-4 text-muted leading-relaxed">
@@ -75,7 +75,7 @@ export default function TextGenerator() {
           understand the importance of clean code organization and reproducibility in AI research.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~7 weeks (May 12<sup>th</sup> - June 27<sup>th</sup>, 2025)
+          Initial project duration:: ~7 weeks (May 12<sup>th</sup> - June 27<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Multi-Model-AI-Text-Generator"
@@ -126,7 +126,7 @@ export default function TextGenerator() {
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /models/components">
                 <option value="models/components/generators.py">
-                  &#x251C;&#x2500; generators.py
+                  &#x2514;&#x2500; generators.py
                 </option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /run">
@@ -136,7 +136,7 @@ export default function TextGenerator() {
                 <option value="run/profiler.py">&#x2514;&#x2500; profiler.py</option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /run/helpers">
-                <option value="run/helpers/widgets.py">&#x251C;&#x2500; widgets.py</option>
+                <option value="run/helpers/widgets.py">&#x2514;&#x2500; widgets.py</option>
               </optgroup>
               <optgroup label="&#x2514;&#x2500; /tests">
                 <option value="tests/test_main.py">&#x251C;&#x2500; test_main.py</option>

@@ -59,7 +59,7 @@ export default function BigramModel() {
           a low level.
         </p>
         <p className="mb-6 text-sm text-secondary italic">
-          Project duration: ~9 days (May 2<sup>nd</sup> - May 11<sup>th</sup>, 2025)
+          Initial project duration:: ~9 days (May 2<sup>nd</sup> - May 11<sup>th</sup>, 2025)
         </p>
         <a
           href="https://github.com/Yosna/Bigram-Language-Model"
