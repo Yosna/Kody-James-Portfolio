@@ -55,9 +55,9 @@ export default function Sidebar() {
             {projectsOpen && (
               <ul className="text-sm ml-4 mt-2 space-y-2">
                 <li>
-                  <Link to="/death-counter">
+                  <Link to="/markdown-analyzer">
                     <button className="w-full text-left p-2 rounded hover:bg-hover">
-                      Elden Ring Death Counter
+                      Markdown Analyzer
                     </button>
                   </Link>
                 </li>
@@ -65,6 +65,13 @@ export default function Sidebar() {
                   <Link to="/text-generator">
                     <button className="w-full text-left p-2 rounded hover:bg-hover">
                       Multi-Model AI Text Generator
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/death-counter">
+                    <button className="w-full text-left p-2 rounded hover:bg-hover">
+                      Elden Ring Death Counter
                     </button>
                   </Link>
                 </li>

@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Home from './Home';
-import DeathCounter from './DeathCounter';
+import MarkdownAnalyzer from './MarkdownAnalyzer';
 import TextGenerator from './TextGenerator';
+import DeathCounter from './DeathCounter';
 import BigramModel from './BigramModel';
 import SynthesisTracker from './SynthesisTracker';
 import AntSwarm from './AntSwarm';
@@ -17,8 +18,9 @@ function App() {
       <div className="flex-1 h-full">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/death-counter" element={<DeathCounter />} />
+          <Route path="/markdown-analyzer" element={<MarkdownAnalyzer />} />
           <Route path="/text-generator" element={<TextGenerator />} />
+          <Route path="/death-counter" element={<DeathCounter />} />
           <Route path="/bigram-model" element={<BigramModel />} />
           <Route path="/synthesis-tracker" element={<SynthesisTracker />} />
           <Route path="/ant-swarm" element={<AntSwarm />} />
