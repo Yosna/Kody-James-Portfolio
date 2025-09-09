@@ -36,13 +36,18 @@ export default function Home() {
         <div>My recent projects include:</div>
         <ul className="list-disc list-inside mt-2 text-left">
           <li>
-            <b>Elden Ring Death Counter</b> - A memory-reading overlay for tracking deaths in real
-            time.
+            <b>Markdown Analyzer</b> - A SaaS application for analyzing and improving markdown
+            files, featuring a React frontend, Flask backend, Firebase Auth, Stripe subscription
+            management, and OpenAI integration, with full testing and production deployment.
           </li>
           <li>
             <b>Multi-Model AI Text Generator</b> - A modular, extensible framework supporting
             bigram, LSTM, GRU, and transformer models, with full unit testing and
             configuration-driven design.
+          </li>
+          <li>
+            <b>Elden Ring Death Counter</b> - A memory-reading overlay for tracking deaths in real
+            time.
           </li>
           <li>
             <b>Bigram Language Model</b> - A character-level neural network for text generation in
